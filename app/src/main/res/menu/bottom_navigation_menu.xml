@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_my_course"
+        android:enabled="true"
+        android:icon="@drawable/baseline_code_24"
+        android:title="@string/my_course"/>
+
+    <item
+        android:id="@+id/item_all_couses"
+        android:enabled="true"
+        android:icon="@drawable/outline_collections_bookmark_24"
+        android:title="@string/all_courses"/>
+
+    <item
+        android:id="@+id/item_profile"
+        android:enabled="true"
+        android:icon="@drawable/outline_account_circle_24"
+        android:title="@string/profile"/>
+
+
+</menu>
