@@ -2,6 +2,7 @@ package com.github.krxwl.codecat
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: BottomNavigationMenuBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // убирает задержку между активити
+        setTheme(com.google.android.material.R.style.Base_V24_Theme_Material3_Dark)
         super.onCreate(savedInstanceState)
+
 
         auth = Firebase.auth
         binding = BottomNavigationMenuBinding.inflate(layoutInflater)

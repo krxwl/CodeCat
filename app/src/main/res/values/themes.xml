@@ -2,4 +2,8 @@
 <resources>
 
     <style name="Theme.CodeCat" parent="android:Theme.Material.Light.DarkActionBar" />
+
+    <style name="Launcher">
+        <item name="android:windowBackground">@color/black</item>
+    </style>
 </resources>
