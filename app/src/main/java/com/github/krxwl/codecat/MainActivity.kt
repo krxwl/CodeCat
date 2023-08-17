@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // убирает задержку между активити
-        setTheme(com.google.android.material.R.style.Base_V24_Theme_Material3_Dark)
+        setTheme(com.google.android.material.R.style.Theme_Material3_Dark_NoActionBar)
         super.onCreate(savedInstanceState)
 
 

@@ -14,6 +14,7 @@ private const val TAG = "AuthenticationFragment"
 class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
 
     private lateinit var codeCatTextView: TextView
+
     private lateinit var loginButton: Button
     private lateinit var registerButton: Button
     private lateinit var forgotPasswordButton: Button
@@ -42,10 +43,19 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
 
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        passwordTextInputLayout.setOnFocusChangeListener { view, hasFocus ->
+            if (!hasFocus) {
+                passwordTextInputLayout.setHint(R.string.password)
+            } else {
+                passwordTextInputLayout.hint = ""
+            }
+        }
     }
+
 
     companion object {
         fun newInstance(): AuthenticationFragment {

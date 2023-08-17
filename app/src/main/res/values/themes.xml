@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.CodeCat" parent="android:Theme.Material.Light.DarkActionBar" />
+    <style name="Theme.Login" parent="android:ThemeOverlay.Material.Dark">
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/snackbar_text</item>
+        <item name="android:windowBackground">@color/violet</item>
+    </style>
 
     <style name="Launcher">
         <item name="android:windowBackground">@color/black</item>
+    </style>
+
+    <style name="Widget.App.Snackbar" parent="Widget.Material3.Snackbar">
+        <item name="backgroundTint">@color/red</item>
+    </style>
+
+    <style name="snackbar_text" parent="@style/Widget.MaterialComponents.Snackbar.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/montserratbold</item>
     </style>
 </resources>
