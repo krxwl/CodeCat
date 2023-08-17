@@ -11,10 +11,14 @@
 
     <string name="helper_text_password">The minimum password length is 8 characters.</string>
 
-    <string name="login">Log in</string>
+    <string name="login">Log In</string>
     <string name="forgot_password">Forgot password?</string>
 
     <string name="register">Register</string>
     
     <string name="enter_an_email">Enter an email</string>
+    <string name="enter_the_correct_email">Enter the correct email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="successfully_loggedin">Successfully Logged In</string>
+    <string name="login_failed">Log In failed</string>
 </resources>
