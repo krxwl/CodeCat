@@ -17,6 +17,9 @@ import com.google.firebase.ktx.Firebase
 private const val KEY_EMAIL_TEXT = "emailText"
 private const val KEY_PASSWORD_TEXT = "passwordText"
 
+// ключи для контракта
+private var LOGIN_RESULT_KEY = 0
+
 private const val TAG = "LoginActivity"
 
 class LoginActivity : AppCompatActivity() {
@@ -91,6 +94,10 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        binding.forgotPasswordButton.setOnClickListener {
+
+        }
+
 
     }
 
@@ -105,3 +112,5 @@ class LoginViewModel: ViewModel() {
     var emailText: String = ""
     var passwordText: String = ""
 }
+
+
