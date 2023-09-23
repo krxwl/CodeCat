@@ -32,6 +32,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RegistrationActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.github.krxwl.codecat.RegistrationActivity" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

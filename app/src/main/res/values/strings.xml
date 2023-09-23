@@ -8,6 +8,10 @@
 
     <string name="email">Email</string>
     <string name="password">Password</string>
+    
+    <string name="first_question">1 / 2</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="second_question">2 / 2</string>
 
     <string name="helper_text_password">The minimum password length is 8 characters.</string>
 
@@ -15,7 +19,8 @@
     <string name="forgot_password">Forgot password?</string>
 
     <string name="register">Register</string>
-    
+
+    <string name="swipe_left">Swipe left to see the next question</string>
     <string name="enter_an_email">Enter an email</string>
     <string name="enter_the_correct_email">Enter the correct email</string>
     <string name="enter_your_password">Enter your password</string>

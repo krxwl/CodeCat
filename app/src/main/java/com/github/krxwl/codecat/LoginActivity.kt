@@ -50,6 +50,15 @@ class LoginActivity : AppCompatActivity() {
         binding.passwordTextInput.setText(loginViewModel.passwordText)
         binding.emailTextInput.setText(loginViewModel.emailText)
 
+        // запускает контракт с результатом активити
+        val activityLauncher = registerForActivityResult(RegistrationActivityContract())
+        { result ->
+            // используем результат activity
+            if (result) {
+                finish()
+            }
+        }
+
 
         binding.loginButton.setOnClickListener {
             val email = binding.emailTextInput.text.toString()
@@ -94,8 +103,10 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.forgotPasswordButton.setOnClickListener {
-
+        binding.registerButton.setOnClickListener {
+            val emailPasswordArrayList = arrayListOf<String>(
+                loginViewModel.passwordText, loginViewModel.emailText)
+            activityLauncher.launch(emailPasswordArrayList)
         }
 
 
