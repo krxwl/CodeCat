@@ -8,7 +8,10 @@ import java.util.Arrays
 
 private const val TAG = "RegistrationActivity"
 
-class RegistrationActivity : AppCompatActivity(), FirstQuestionFragment.Callbacks {
+class RegistrationActivity : AppCompatActivity(), FirstQuestionFragment.Callbacks,
+    SecondQuestionFragment.Callbacks {
+
+    private var enteredPassword: String = ""
 
     private val registrationViewModel: RegistrationViewModel by lazy {
         ViewModelProvider(this)[RegistrationViewModel::class.java]
@@ -33,12 +36,17 @@ class RegistrationActivity : AppCompatActivity(), FirstQuestionFragment.Callback
 
     }
 
+    override fun passwordEntered(password: String) {
+        enteredPassword = password
+    }
+
     // на кнопку нажали поэтому меняем фрагмент
     override fun onNextStepButtonClicked() {
         val newFragment = SecondQuestionFragment()
         val bundle = Bundle()
         bundle.putString("savedPassword", intent.getStringArrayExtra("email_password_key")?.get(0).toString())
-        Log.i(TAG, "savedPassword ${intent.getStringArrayExtra("email_password_key")?.get(0).toString()}")
+        bundle.putString("enteredPassword", enteredPassword)
+        Log.i(TAG, "enteredPassword ${enteredPassword}")
         newFragment.arguments = bundle
         supportFragmentManager.beginTransaction()
             .replace(R.id.registration_activity, newFragment).addToBackStack(null).commit()

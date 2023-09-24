@@ -2,6 +2,7 @@ package com.github.krxwl.codecat
 
 import android.content.Context
 import android.os.Bundle
+import android.provider.CallLog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,12 @@ private const val KEY_PASSWORD_TEXT = "passwordText"
 private const val TAG = "SecondQuestionFragment"
 class SecondQuestionFragment : Fragment() {
 
+    interface Callbacks {
+        fun passwordEntered(password: String)
+    }
+
+    private lateinit var callbacks: Callbacks
+
     private val registrationViewModel: RegistrationViewModel by lazy {
         ViewModelProvider(this)[RegistrationViewModel::class.java]
     }
@@ -28,8 +35,11 @@ class SecondQuestionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStepTwoBinding.inflate(layoutInflater, container, false)
-
-        binding.passwordTextInputRegister.setText(arguments?.getString("savedPassword"))
+        if (arguments?.getString("enteredPassword") != "") {
+            binding.passwordTextInputRegister.setText(arguments?.getString("enteredPassword"))
+        } else {
+            binding.passwordTextInputRegister.setText(arguments?.getString("savedPassword"))
+        }
 
         if (savedInstanceState != null) {
             registrationViewModel.password = savedInstanceState.getString(KEY_PASSWORD_TEXT, "")
@@ -42,6 +52,7 @@ class SecondQuestionFragment : Fragment() {
         binding.passwordTextInputRegister.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
                 registrationViewModel.password = binding.passwordTextInputRegister.text.toString()
+                callbacks.passwordEntered(binding.passwordTextInputRegister.text.toString())
             }
         }
 
@@ -50,6 +61,11 @@ class SecondQuestionFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
