@@ -6,9 +6,9 @@ import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
 
 // контракт для запуска активити с результатом
-class RegistrationActivityContract : ActivityResultContract<ArrayList<String>?, Boolean>() {
+class RegistrationActivityContract : ActivityResultContract<Array<String>?, Boolean>() {
 
-    override fun createIntent(context: Context, input: ArrayList<String>?): Intent {
+    override fun createIntent(context: Context, input: Array<String>?): Intent {
         return Intent(context, RegistrationActivity::class.java)
             .putExtra("email_password_key", input)
     }

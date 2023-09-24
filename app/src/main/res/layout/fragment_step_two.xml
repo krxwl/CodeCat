@@ -28,6 +28,7 @@
             android:id="@+id/textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:endIconMode="password_toggle"
             android:padding="50dp">
 
             <com.google.android.material.textfield.TextInputEditText

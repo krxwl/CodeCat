@@ -29,13 +29,15 @@ class SecondQuestionFragment : Fragment() {
     ): View {
         binding = FragmentStepTwoBinding.inflate(layoutInflater, container, false)
 
+        binding.passwordTextInputRegister.setText(arguments?.getString("savedPassword"))
+
         if (savedInstanceState != null) {
             registrationViewModel.password = savedInstanceState.getString(KEY_PASSWORD_TEXT, "")
             Log.i(TAG, "password ${registrationViewModel.password}")
 
         }
         Log.i(TAG, "установила пароль ${registrationViewModel.password}")
-        binding.passwordTextInputRegister.setText(registrationViewModel.password)
+        //binding.passwordTextInputRegister.setText(registrationViewModel.password)
 
         binding.passwordTextInputRegister.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {

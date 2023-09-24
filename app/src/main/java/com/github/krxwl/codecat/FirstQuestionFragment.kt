@@ -35,11 +35,8 @@ class FirstQuestionFragment : Fragment(R.layout.fragment_step_one) {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStepOneBinding.inflate(layoutInflater, container, false)
-
-        if (savedInstanceState != null) {
-            registrationViewModel.email = savedInstanceState.getString(KEY_EMAIL_TEXT, "")
-            registrationViewModel.password = savedInstanceState.getString(KEY_PASSWORD_TEXT, "")
-        }
+        Log.i(TAG, "savedEmail ${arguments?.getString("savedEmail")}")
+        binding.emailTextinput.setText(arguments?.getString("savedEmail"))
 
         // говорим нашей активити через колбеки что на кнопку нажали
         binding.nextStepButton.setOnClickListener {
@@ -54,11 +51,18 @@ class FirstQuestionFragment : Fragment(R.layout.fragment_step_one) {
 
         return binding.root
     }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i(TAG, "вернулись")
+    }
+
     // вызывается когда фрагмент прикрепляется к activity
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks?
     }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(KEY_EMAIL_TEXT, registrationViewModel.email)

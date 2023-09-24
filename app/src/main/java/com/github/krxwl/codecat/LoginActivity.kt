@@ -104,9 +104,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.registerButton.setOnClickListener {
-            val emailPasswordArrayList = arrayListOf<String>(
-                loginViewModel.passwordText, loginViewModel.emailText)
-            activityLauncher.launch(emailPasswordArrayList)
+            val emailPasswordArray = arrayOf<String>(
+                binding.passwordTextInput.text.toString(), binding.emailTextInput.text.toString())
+            activityLauncher.launch(emailPasswordArray)
         }
 
 
