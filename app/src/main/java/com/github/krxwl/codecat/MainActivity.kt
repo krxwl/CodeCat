@@ -28,8 +28,9 @@ class MainActivity : AppCompatActivity() {
         binding = BottomNavigationMenuBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+        // ДЛЯ ОТЛАДКИ
+        //Firebase.auth.signOut()
         val currentUser = auth.currentUser
-
         if (currentUser == null) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)

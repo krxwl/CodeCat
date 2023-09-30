@@ -3,13 +3,16 @@ package com.github.krxwl.codecat
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.github.krxwl.codecat.databinding.FragmentStepOneBinding
+import com.google.android.material.snackbar.Snackbar
 
 //ключи к viewmodel
 private const val KEY_EMAIL_TEXT = "emailText"
@@ -26,6 +29,8 @@ class FirstQuestionFragment : Fragment(R.layout.fragment_step_one) {
 
     interface Callbacks {
         fun onNextStepButtonClicked()
+
+        fun enteredEmail(email: String)
     }
 
     private var callbacks: Callbacks? = null
@@ -35,12 +40,28 @@ class FirstQuestionFragment : Fragment(R.layout.fragment_step_one) {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStepOneBinding.inflate(layoutInflater, container, false)
-        Log.i(TAG, "savedEmail ${arguments?.getString("savedEmail")}")
+
         binding.emailTextinput.setText(arguments?.getString("savedEmail"))
 
-        // говорим нашей активити через колбеки что на кнопку нажали
         binding.nextStepButton.setOnClickListener {
-            callbacks?.onNextStepButtonClicked()
+            val email = binding.emailTextinput.text.toString()
+
+            val snackbar = Snackbar.make(binding.stepOneFragment, "", Snackbar.LENGTH_SHORT)
+            snackbar.view.layoutParams =
+                (snackbar.view.layoutParams as FrameLayout.LayoutParams).apply {
+                    gravity = Gravity.TOP
+                }
+            if (email.isBlank() || email.isEmpty()) {
+                snackbar.setText(R.string.enter_an_email)
+                snackbar.show()
+            } else if (!email.contains('@')) {
+                snackbar.setText(R.string.enter_the_correct_email)
+                snackbar.show()
+            } else {
+                callbacks?.enteredEmail(email)
+                // говорим нашей активити через колбеки что на кнопку нажал
+                callbacks?.onNextStepButtonClicked()
+            }
         }
 
         binding.emailTextinput.setOnFocusChangeListener { _, focus ->

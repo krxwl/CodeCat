@@ -19,6 +19,7 @@
     <string name="forgot_password">Forgot password?</string>
 
     <string name="register">Register</string>
+    <string name="authentication_failed">Authentication failed</string>
 
     <string name="swipe_left">Swipe left to see the next question</string>
     <string name="enter_an_email">Enter an email</string>

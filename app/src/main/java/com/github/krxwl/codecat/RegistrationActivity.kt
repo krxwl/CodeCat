@@ -1,5 +1,6 @@
 package com.github.krxwl.codecat
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ class RegistrationActivity : AppCompatActivity(), FirstQuestionFragment.Callback
     SecondQuestionFragment.Callbacks {
 
     private var enteredPassword: String = ""
+    private var enteredEmail: String = ""
 
     private val registrationViewModel: RegistrationViewModel by lazy {
         ViewModelProvider(this)[RegistrationViewModel::class.java]
@@ -40,13 +42,24 @@ class RegistrationActivity : AppCompatActivity(), FirstQuestionFragment.Callback
         enteredPassword = password
     }
 
+    override fun userRegistered() {
+        setResult(Activity.RESULT_OK)
+        finish()
+    }
+
+    override fun enteredEmail(email: String) {
+        enteredEmail = email
+    }
+
     // на кнопку нажали поэтому меняем фрагмент
     override fun onNextStepButtonClicked() {
         val newFragment = SecondQuestionFragment()
         val bundle = Bundle()
+
         bundle.putString("savedPassword", intent.getStringArrayExtra("email_password_key")?.get(0).toString())
         bundle.putString("enteredPassword", enteredPassword)
-        Log.i(TAG, "enteredPassword ${enteredPassword}")
+        bundle.putString("email", enteredEmail)
+
         newFragment.arguments = bundle
         supportFragmentManager.beginTransaction()
             .replace(R.id.registration_activity, newFragment).addToBackStack(null).commit()

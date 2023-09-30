@@ -1,5 +1,7 @@
 package com.github.krxwl.codecat
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -16,9 +18,6 @@ import com.google.firebase.ktx.Firebase
 //ключи к viewmodel
 private const val KEY_EMAIL_TEXT = "emailText"
 private const val KEY_PASSWORD_TEXT = "passwordText"
-
-// ключи для контракта
-private var LOGIN_RESULT_KEY = 0
 
 private const val TAG = "LoginActivity"
 
@@ -81,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) {
                     if (it.isSuccessful) {
-                        snackbar.setText("Successfully LoggedIn")
+                        finish()
                     } else {
                         snackbar.setText("Log In failed")
                     }
@@ -111,11 +110,17 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(KEY_PASSWORD_TEXT, loginViewModel.passwordText)
         outState.putString(KEY_EMAIL_TEXT, loginViewModel.emailText)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            finish()
+        }
     }
 }
 

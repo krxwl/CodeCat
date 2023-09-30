@@ -4,14 +4,20 @@ import android.content.Context
 import android.os.Bundle
 import android.provider.CallLog
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.github.krxwl.codecat.databinding.FragmentStepTwoBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 private const val KEY_EMAIL_TEXT = "emailText"
 private const val KEY_PASSWORD_TEXT = "passwordText"
@@ -20,9 +26,13 @@ class SecondQuestionFragment : Fragment() {
 
     interface Callbacks {
         fun passwordEntered(password: String)
+
+        fun userRegistered()
     }
 
+    private lateinit var auth: FirebaseAuth
     private lateinit var callbacks: Callbacks
+    private lateinit var email: String
 
     private val registrationViewModel: RegistrationViewModel by lazy {
         ViewModelProvider(this)[RegistrationViewModel::class.java]
@@ -35,6 +45,11 @@ class SecondQuestionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStepTwoBinding.inflate(layoutInflater, container, false)
+
+        auth = Firebase.auth
+
+        email = arguments?.getString("email").toString()
+
         if (arguments?.getString("enteredPassword") != "") {
             binding.passwordTextInputRegister.setText(arguments?.getString("enteredPassword"))
         } else {
@@ -43,11 +58,8 @@ class SecondQuestionFragment : Fragment() {
 
         if (savedInstanceState != null) {
             registrationViewModel.password = savedInstanceState.getString(KEY_PASSWORD_TEXT, "")
-            Log.i(TAG, "password ${registrationViewModel.password}")
-
         }
-        Log.i(TAG, "установила пароль ${registrationViewModel.password}")
-        //binding.passwordTextInputRegister.setText(registrationViewModel.password)
+
 
         binding.passwordTextInputRegister.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
@@ -57,7 +69,31 @@ class SecondQuestionFragment : Fragment() {
         }
 
         binding.registerButton.setOnClickListener {
+            val password = binding.passwordTextInputRegister.text.toString()
+            val snackbar = Snackbar.make(binding.stepTwoFragment, "", Snackbar.LENGTH_SHORT)
 
+            snackbar.view.layoutParams =
+                (snackbar.view.layoutParams as FrameLayout.LayoutParams).apply {
+                    gravity = Gravity.TOP
+                }
+
+            if (password.isBlank() || password.isEmpty()) {
+                snackbar.setText(R.string.enter_your_password)
+                snackbar.show()
+            } else {
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "createUserWithEmail:success")
+                        val user = auth.currentUser
+                        callbacks.userRegistered()
+
+                    } else {
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        snackbar.setText(R.string.authentication_failed)
+                    }
+                }
+            }
         }
 
         return binding.root
