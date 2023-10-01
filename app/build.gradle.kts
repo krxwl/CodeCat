@@ -76,6 +76,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.github.bluejamesbond:textjustify-android:2.1.6")
 
     implementation("androidx.fragment:fragment-ktx:1.6.1")
 
