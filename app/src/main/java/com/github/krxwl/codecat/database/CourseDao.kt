@@ -13,7 +13,7 @@ interface CourseDao {
     fun getCourses(): LiveData<List<Course>>
 
     @Query("SELECT * FROM modules WHERE id=(:id)")
-    fun getCourse(id: UUID): LiveData<Course?>
+    fun getCourse(id: Int): LiveData<Course?>
 
     @Update
     fun updateCourse(course: Course)
