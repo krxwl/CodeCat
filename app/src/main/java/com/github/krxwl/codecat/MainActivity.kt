@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         binding = BottomNavigationMenuBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
         // ДЛЯ ОТЛАДКИ
         //Firebase.auth.signOut()
         val currentUser = auth.currentUser
@@ -35,13 +36,17 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-        /*NavigationBarView.OnItemReselectedListener {
+
+        binding.bottomNavigation.setOnItemSelectedListener {
             item ->
             when(item.itemId) {
                 R.id.item_my_course -> {
                     true
                 }
                 R.id.item_all_couses -> {
+                    supportFragmentManager.beginTransaction()
+                        .add(R.id.bottom_navigation, AllCoursesFragment())
+                        .commit()
                     true
                 }
                 R.id.item_profile -> {
@@ -50,8 +55,7 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
 
-
         }
-    */
+
     }
 }
