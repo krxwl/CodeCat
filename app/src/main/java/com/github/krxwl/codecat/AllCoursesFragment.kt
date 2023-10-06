@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -27,6 +28,10 @@ class AllCoursesFragment() : Fragment(R.layout.all_courses_fragment) {
 
     private lateinit var binding: AllCoursesFragmentBinding
     private var adapter: CourseAdapter? = CourseAdapter(arrayListOf())
+
+    private val allCoursesViewModel: allCoursesViewModel by lazy {
+        ViewModelProvider(this)[allCoursesViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +54,15 @@ class AllCoursesFragment() : Fragment(R.layout.all_courses_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        TODO("ПОСТАВИТЬ ОБЗЕРВЕРА")
+        allCoursesViewModel.courseListLiveData.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer { courses ->
+                courses?.let {
+                    updateUI(courses)
+                }
+            }
+        )
+
     }
 /*
     override fun onAttach(context: Context) {
@@ -113,5 +126,7 @@ class AllCoursesFragment() : Fragment(R.layout.all_courses_fragment) {
 }
 
 class allCoursesViewModel : ViewModel() {
-    // TODO: ОБНОВЛЕНИЕ РЕПОЗИТОРИЯ
+    private val courseRepository = CourseRepository.get()
+
+    val courseListLiveData = courseRepository.getCourses()
 }
