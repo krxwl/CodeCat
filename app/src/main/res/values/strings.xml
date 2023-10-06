@@ -28,4 +28,5 @@
     <string name="successfully_loggedin">Successfully Logged In</string>
     <string name="login_failed">Log In failed</string>
     <string name="next_step">Next step</string>
+    <string name="programming_language_logo">programming language logo</string>
 </resources>
