@@ -78,7 +78,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     implementation("me.biubiubiu.justifytext:library:1.1")
-    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+    implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
 
     implementation("androidx.fragment:fragment-ktx:1.6.1")
 
