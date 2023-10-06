@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:id="@+id/constraint_recyclerview"
         android:padding="20dp">
 
         <View
@@ -29,44 +30,45 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserratbold"
             android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout5"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout5"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout5"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toTopOf="@+id/view"
             tools:text="Python" />
 
         <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_height="match_parent"
-            android:paddingLeft="25dp"
-            android:paddingRight="20dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="20dp"
             tools:layout_editor_absoluteX="20dp"
             tools:layout_editor_absoluteY="20dp">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/logo_language"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/python_icon"
+                android:paddingBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratbold"
-            android:maxLength="149"
-            android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintRight_toLeftOf="parent"
-            android:breakStrategy="balanced"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            tools:text="Высокоуровневый язык программирования общего назначения с динамической строгой типизацией и автоматическим управлением памятью, ориентированный на повышение производительности разработчика, читаемости кода и его качества, а также на обеспечение переносимости написанных на нём программ."/>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/baseline_star_outline_24"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintTop_toTopOf="@+id/view" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
