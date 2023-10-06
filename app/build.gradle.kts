@@ -2,11 +2,13 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.github.krxwl.codecat"
     compileSdk = 34
+    buildToolsVersion = "21.0.1"
 
     defaultConfig {
         applicationId = "com.github.krxwl.codecat"
@@ -76,6 +78,9 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    implementation ("androidx.room:room-runtime:2.2.4")
+    kapt("androidx.room:room-compiler:2.2.4")
 
     implementation("me.biubiubiu.justifytext:library:1.1")
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
