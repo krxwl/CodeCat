@@ -2,9 +2,11 @@ package com.github.krxwl.codecat.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.github.krxwl.codecat.Course
 
 @Database(entities = [Course::class], version = 2)
+@TypeConverters(CourseTypeConverters::class)
 abstract class CourseDatabase: RoomDatabase() {
     abstract fun courseDao(): CourseDao
 }

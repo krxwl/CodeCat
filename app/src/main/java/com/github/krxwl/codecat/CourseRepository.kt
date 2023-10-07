@@ -7,7 +7,7 @@ import com.github.krxwl.codecat.database.CourseDatabase
 import java.lang.IllegalStateException
 import java.util.concurrent.Executors
 
-private const val DATABASE_NAME = "modules-and-questions-database"
+private const val DATABASE_NAME = "databases.db"
 class CourseRepository private constructor(context: Context) {
 
     private val database : CourseDatabase = Room.databaseBuilder(
@@ -44,7 +44,7 @@ class CourseRepository private constructor(context: Context) {
 
         fun get(): CourseRepository {
             return INSTANCE ?:
-            throw IllegalStateException("CrimeRepo must be init")
+            throw IllegalStateException("CouurseRepo must be init")
         }
     }
 }

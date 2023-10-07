@@ -37,15 +37,25 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.bottom_navigation_frag)
+
+        if (currentFragment == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.bottom_navigation_frag, MyCourse()).commit()
+        }
+
         binding.bottomNavigation.setOnItemSelectedListener {
             item ->
             when(item.itemId) {
                 R.id.item_my_course -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.bottom_navigation_frag, MyCourse())
+                        .commit()
                     true
                 }
                 R.id.item_all_couses -> {
                     supportFragmentManager.beginTransaction()
-                        .add(R.id.bottom_navigation, AllCoursesFragment())
+                        .replace(R.id.bottom_navigation_frag, AllCoursesFragment())
                         .commit()
                     true
                 }
