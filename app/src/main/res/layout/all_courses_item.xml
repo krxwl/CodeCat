@@ -4,15 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/constraint_recyclerview"
-        android:padding="20dp">
+        android:padding="10dp">
 
         <View
             android:id="@+id/view"
@@ -42,8 +42,6 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="match_parent"
-            android:paddingStart="25dp"
-            android:paddingEnd="20dp"
             tools:layout_editor_absoluteX="20dp"
             tools:layout_editor_absoluteY="20dp">
 
@@ -51,7 +49,8 @@
                 android:id="@+id/logo_language"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:paddingBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -60,8 +59,8 @@
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:background="@null"
@@ -73,10 +72,10 @@
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
             android:id="@+id/circularProgressBar"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="20dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="40dp"
             android:layout_marginBottom="20dp"
             app:cpb_background_progressbar_color="#b6bbd8"
             app:cpb_background_progressbar_width="10dp"
