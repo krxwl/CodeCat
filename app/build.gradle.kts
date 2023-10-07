@@ -78,6 +78,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
+    implementation("com.readystatesoftware.sqliteasset:sqliteassethelper:+")
     implementation ("androidx.room:room-runtime:2.2.4")
     kapt("androidx.room:room-compiler:2.2.4")
 

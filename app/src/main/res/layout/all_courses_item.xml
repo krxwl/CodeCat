@@ -88,6 +88,18 @@
             app:layout_constraintTop_toTopOf="@+id/view" />
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratbold"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
+            app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+            app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+            app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
+            tools:text="5/10" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
