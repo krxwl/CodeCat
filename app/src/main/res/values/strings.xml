@@ -17,6 +17,7 @@
 
     <string name="login">Log In</string>
     <string name="forgot_password">Forgot password?</string>
+    <string name="run_course">Запустить курс</string>
 
     <string name="register">Register</string>
     <string name="authentication_failed">Authentication failed</string>
