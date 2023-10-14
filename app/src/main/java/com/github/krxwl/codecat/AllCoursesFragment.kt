@@ -51,7 +51,6 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_fragment) {
     }
 
     private fun updateUI(courses: List<Course>) {
-        Log.i(TAG, "отдал")
         adapter = CourseAdapter(ArrayList(courses))
         adapter!!.submitList(ArrayList(courses))
         binding.allCoursesRecyclerview.adapter = adapter
