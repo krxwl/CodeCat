@@ -16,6 +16,7 @@ import com.github.krxwl.codecat.databinding.BottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.MultiBrowseCarouselStrategy
+import com.google.gson.Gson
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -68,7 +69,10 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
                 val responseBody = response.body?.string()
                 handler.post {
                     val books = ArrayList<Book>()
-                    Log.i(TAG, "получил ${response.body}")
+                    val map = Gson()
+                    val res = map.fromJson(responseBody, Map::class.java)
+                    res["items"]
+                    Log.i(TAG, "получил ${res}")
                 }
             }
         })
