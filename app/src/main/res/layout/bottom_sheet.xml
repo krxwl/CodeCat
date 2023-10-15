@@ -79,6 +79,26 @@
                 tools:text="1/15"
                 android:id="@+id/progress_textview"/>
 
+            <TextView
+                android:id="@+id/recommended_literature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/montserratbold"
+                android:text="@string/recommended_literature"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/language_description" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/carousel_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/recommended_literature" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

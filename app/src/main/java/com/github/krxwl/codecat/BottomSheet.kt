@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.krxwl.codecat.databinding.BottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.carousel.CarouselLayoutManager
+import com.google.android.material.carousel.MultiBrowseCarouselStrategy
 
 class BottomSheet(course: Course) : BottomSheetDialogFragment() {
 
@@ -22,6 +24,11 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
         binding.languageDescription.text = currentCourse.description
         // TODO("НОВАЯ КОЛОНКА В ТАБЛИЦЕ С ПРОГРЕССОМ")
         binding.progressTextview.text = "${currentCourse.progress}/15"
+
+        var carouselLayoutManager = CarouselLayoutManager()
+        carouselLayoutManager.setCarouselStrategy(MultiBrowseCarouselStrategy())
+        binding.carouselRecyclerView.layoutManager = carouselLayoutManager
+
         return binding.root
     }
 
