@@ -1,43 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <FrameLayout
+<FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/standard_bottom_sheet"
-        android:padding="20dp"
+        android:padding="40dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/language_imageview"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:id="@+id/language_imageview"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/language_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserratbold"
-                android:id="@+id/language_name"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/language_imageview"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+                app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Python" />
 
             <com.mikhaellopez.circularprogressbar.CircularProgressBar
                 android:id="@+id/circularProgressBar"
-                android:layout_width="135dp"
-                android:layout_height="135dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:layout_marginTop="40dp"
                 app:cpb_background_progressbar_color="#b6bbd8"
                 app:cpb_background_progressbar_width="15dp"
@@ -46,7 +42,6 @@
                 app:cpb_progressbar_width="10dp"
                 app:cpb_round_border="false"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/language_imageview"
                 app:layout_constraintTop_toBottomOf="@+id/language_name" />
 
             <ImageButton
@@ -64,6 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:id="@+id/language_description"
                 android:fontFamily="@font/montserratbold"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -71,9 +67,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageButton2"
                 tools:text="Java — язык программирования общего назначения. Он используется для написания кода, который может выполняться на разных платформах: компьютерах, мобильных устройствах и серверах. " />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserratbold"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
+                app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+                app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+                app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
+                tools:text="1/15"
+                android:id="@+id/progress_textview"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -24,12 +24,12 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar
 private val TAG = "AllCoursesFragment"
 
 class AllCoursesFragment : Fragment(R.layout.all_courses_fragment) {
-/*
+
     interface Callbacks {
-        fun onCourseSelected(id: Int)
+        fun onCourseSelected(course: Course)
     }
 
-    private var callbacks: Callbacks? = null*/
+    private var callbacks: Callbacks? = null
 
     private lateinit var binding: AllCoursesFragmentBinding
     private var adapter: CourseAdapter? = CourseAdapter(arrayListOf())
@@ -70,11 +70,11 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_fragment) {
         )
 
     }
-/*
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks?
-    }*/
+    }
 
     inner class CourseAdapter(var courses: ArrayList<Course>) : ListAdapter<Course, CourseAdapter.CourseHolder>(LinkDiffCallback()) {
         override fun onBindViewHolder(holder: CourseAdapter.CourseHolder, position: Int) {
@@ -104,6 +104,7 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_fragment) {
 
             private val nameTextView: TextView = itemView.findViewById(R.id.language_name)
             private val imageButton: ImageView = itemView.findViewById(R.id.logo_language)
+            private val progressTextView: TextView = itemView.findViewById(R.id.textview_progress)
             private val circularProgressBar: CircularProgressBar = itemView.findViewById(R.id.circularProgressBar)
 
             init {
@@ -115,10 +116,12 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_fragment) {
                 nameTextView.text = this.course.name
                 circularProgressBar.progress = this.course.progress?.toFloat()!!
                 imageButton.setImageBitmap(this.course.image)
+                // TODO("НОВАЯ КОЛОНКА В БД")
+                progressTextView.setText("${this.course.progress}/15")
             }
 
             override fun onClick(p0: View?) {
-                TODO("Not yet implemented")
+                callbacks?.onCourseSelected(this.course)
             }
         }
     }

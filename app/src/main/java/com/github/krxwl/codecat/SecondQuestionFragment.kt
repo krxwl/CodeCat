@@ -80,8 +80,11 @@ class SecondQuestionFragment : Fragment() {
             if (password.isBlank() || password.isEmpty()) {
                 snackbar.setText(R.string.enter_your_password)
                 snackbar.show()
+            } else if (password.length < 8) {
+                snackbar.setText(R.string.too_short_password)
+                snackbar.show()
             } else {
-                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                auth.createUserWithEmailAndPassword(email.strip(), password.strip()).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success")

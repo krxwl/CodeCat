@@ -78,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
                 snackbar.setText(R.string.enter_your_password)
                 snackbar.show()
             } else {
-                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) {
+                auth.signInWithEmailAndPassword(email.strip(), password.strip()).addOnCompleteListener(this) {
                     if (it.isSuccessful) {
                         finish()
                     } else {

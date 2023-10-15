@@ -13,10 +13,15 @@ import com.google.firebase.ktx.Firebase
 
 private const val TAG = "MainActivity"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AllCoursesFragment.Callbacks {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: BottomNavigationMenuBinding
+
+    override fun onCourseSelected(course: Course) {
+        val bottomSheet = BottomSheet(course)
+        bottomSheet.show(supportFragmentManager, BottomSheet.TAG)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // убирает задержку между активити
@@ -25,15 +30,13 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
         binding = BottomNavigationMenuBinding.inflate(layoutInflater)
 
-
-
         setContentView(binding.root)
 
         val adb = AssetDatabaseOpenHelper(this)
         adb.openDatabase()
 
         // ДЛЯ ОТЛАДКИ
-        //Firebase.auth.signOut()
+        Firebase.auth.signOut()
         val currentUser = auth.currentUser
         if (currentUser == null) {
             val intent = Intent(this, LoginActivity::class.java)
