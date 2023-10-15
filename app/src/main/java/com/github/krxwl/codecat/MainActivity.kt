@@ -2,9 +2,6 @@ package com.github.krxwl.codecat
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
-import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import com.github.krxwl.codecat.databinding.BottomNavigationMenuBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -36,7 +33,7 @@ class MainActivity : AppCompatActivity(), AllCoursesFragment.Callbacks {
         adb.openDatabase()
 
         // ДЛЯ ОТЛАДКИ
-        Firebase.auth.signOut()
+        //Firebase.auth.signOut()
         val currentUser = auth.currentUser
         if (currentUser == null) {
             val intent = Intent(this, LoginActivity::class.java)
