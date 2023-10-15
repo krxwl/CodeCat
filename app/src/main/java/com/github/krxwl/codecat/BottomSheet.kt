@@ -69,10 +69,19 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
                 val responseBody = response.body?.string()
                 handler.post {
                     val books = ArrayList<Book>()
-                    val map = Gson()
-                    val res = map.fromJson(responseBody, Map::class.java)
-                    res["items"]
-                    Log.i(TAG, "получил ${res}")
+                    val id = ArrayList<String>()
+                    val gson = Gson()
+                    val map = gson.fromJson(responseBody, Map::class.java)["items"] as List<*>
+
+                    for (i in map) {
+                        for ((key, value) in (i as Map<*, *>)) {
+                            if (key.toString() == "id") {
+                                id.add(value.toString())
+                            }
+                        }
+
+                    }
+                    Log.i(TAG, "получил ${id}")
                 }
             }
         })
