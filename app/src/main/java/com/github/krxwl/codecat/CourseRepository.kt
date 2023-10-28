@@ -29,6 +29,10 @@ class CourseRepository private constructor(context: Context) {
         return courseDao.getCourses()
     }
 
+    fun getSubmodules(id: Int): LiveData<List<Submodule>> {
+        return courseDao.getSubmodules(id)
+    }
+
     fun getCourse(id: Int): LiveData<Course?> = courseDao.getCourse(id)
 
     companion object {
@@ -44,7 +48,7 @@ class CourseRepository private constructor(context: Context) {
 
         fun get(): CourseRepository {
             return INSTANCE ?:
-            throw IllegalStateException("CouurseRepo must be init")
+            throw IllegalStateException("CourseRepo must be init")
         }
     }
 }

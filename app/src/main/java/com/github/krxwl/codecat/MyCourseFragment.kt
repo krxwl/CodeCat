@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.github.krxwl.codecat.customspinner.CustomAdapter
 import com.github.krxwl.codecat.customspinner.CustomItem
 import com.github.krxwl.codecat.databinding.MyCourseFragmentBinding
 
+private const val TAG = "MyCourseFragment"
 class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
 
     lateinit var binding: MyCourseFragmentBinding
@@ -28,6 +30,8 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
         savedInstanceState: Bundle?
     ): View {
         binding = MyCourseFragmentBinding.inflate(layoutInflater)
+
+        //myCourseViewModel.submodulesListLiveData = myCourseViewModel.courseRepository.getSubmodules(bin)
 
         return binding.root
     }
@@ -45,6 +49,9 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
                         customArrayList.add(CustomItem(name.toString(), image!!))
                     }
                     binding.customSpinner.adapter = CustomAdapter(this.requireContext(), customArrayList)
+                    binding.customSpinner.selectedItem
+                    Log.i(TAG, "${binding.customSpinner.selectedItem}")
+                    //myCourseViewModel.submodulesListLiveData = myCourseViewModel.courseRepository.getSubmodules(bin)
                 }
             }
         )
@@ -53,6 +60,7 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
 }
 
 class MyCourseViewModel : ViewModel() {
-    private val courseRepository = CourseRepository.get()
+    val courseRepository = CourseRepository.get()
     val courseListLiveData = courseRepository.getCourses()
+    //lateinit var submodulesListLiveData: LiveData<List<Submodule>>
 }

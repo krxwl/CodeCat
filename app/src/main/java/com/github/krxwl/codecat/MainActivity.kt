@@ -24,13 +24,14 @@ class MainActivity : AppCompatActivity(), AllCoursesFragment.Callbacks {
         // убирает задержку между активити
         setTheme(com.google.android.material.R.style.Theme_Material3_Dark_NoActionBar)
         super.onCreate(savedInstanceState)
+        val adb = AssetDatabaseOpenHelper(this)
+        adb.openDatabase()
         auth = Firebase.auth
         binding = BottomNavigationMenuBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
-        val adb = AssetDatabaseOpenHelper(this)
-        adb.openDatabase()
+
 
         // ДЛЯ ОТЛАДКИ
         //Firebase.auth.signOut()
