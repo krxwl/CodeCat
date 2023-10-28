@@ -11,7 +11,6 @@ import java.io.IOException
 class AssetDatabaseOpenHelper(private val context: Context) {
 
     companion object {
-
         private val DB_NAME = "databases.db"
     }
 

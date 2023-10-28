@@ -60,7 +60,7 @@ dependencies {
     val nav_version = "2.7.3"
     implementation("androidx.core:core-ktx:1.10.1")
 
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.10.0")
 
     implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
     implementation("com.google.firebase:firebase-database-ktx")
@@ -82,10 +82,11 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
 
     implementation("com.readystatesoftware.sqliteasset:sqliteassethelper:+")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation ("androidx.room:room-runtime:2.2.4")
     kapt("androidx.room:room-compiler:2.2.4")
 
-    implementation("me.biubiubiu.justifytext:library:1.1")
+    implementation("com.tuyenmonkey:mkloader:1.4.0")
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
 
     implementation("androidx.fragment:fragment-ktx:1.6.1")

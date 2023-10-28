@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), AllCoursesFragment.Callbacks {
 
         if (currentFragment == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.bottom_navigation_frag, MyCourse()).commit()
+                .add(R.id.bottom_navigation_frag, MyCourseFragment()).commit()
         }
 
         binding.bottomNavigation.setOnItemSelectedListener {
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), AllCoursesFragment.Callbacks {
             when(item.itemId) {
                 R.id.item_my_course -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.bottom_navigation_frag, MyCourse())
+                        .replace(R.id.bottom_navigation_frag, MyCourseFragment())
                         .commit()
                     true
                 }
