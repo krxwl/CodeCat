@@ -1,19 +1,19 @@
 package com.github.krxwl.codecat
 
+import android.R
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.transition.Transition
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -30,7 +30,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
-import java.lang.NullPointerException
 
 
 private const val API_KEY_GOOGLE_BOOKS = "AIzaSyBATmMX8JWe5S2HnyM_A09g46aQzx503xI"
@@ -168,7 +167,7 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-        ): CarouselAdapter.BookHolder {
+        ): BookHolder {
             Log.i(TAG, "заполняем")
             return BookHolder(layoutInflater.inflate(R.layout.carousel_item, parent, false))
         }
@@ -177,6 +176,7 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
 
             private lateinit var book: Book
 
+            private val darkeningBlock: View = itemView.findViewById(R.id.darkening_block)
             private val nameTextView: TextView = itemView.findViewById(R.id.book_name)
             private val imageView: ImageView = itemView.findViewById(R.id.book_picture)
             private val authorTextView: TextView = itemView.findViewById(R.id.author_textview)
@@ -192,10 +192,15 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
                 nameTextView.visibility = View.GONE
                 authorTextView.visibility = View.GONE
                 imageView.setImageBitmap(this.book.picture)
+
+                imageView.setOnClickListener {
+                    val animFadeIn = AnimationUtils.loadAnimation(context, R.anim.darkening_animation)
+                    darkeningBlock.startAnimation(animFadeIn)
+                }
             }
 
             override fun onClick(p0: View?) {
-                //callbacks?.onCourseSelected(this.book)
+                //
             }
         }
     }
