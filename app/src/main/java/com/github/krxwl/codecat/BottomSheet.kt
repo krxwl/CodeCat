@@ -1,6 +1,5 @@
 package com.github.krxwl.codecat
 
-import android.R
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -10,7 +9,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.AlphaAnimation
+import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
+import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
@@ -169,7 +172,7 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
             viewType: Int
         ): BookHolder {
             Log.i(TAG, "заполняем")
-            return BookHolder(layoutInflater.inflate(R.layout.carousel_item, parent, false))
+            return BookHolder(layoutInflater.inflate(R.layout.book_carousel_item, parent, false))
         }
 
         inner class BookHolder(view: View?) : RecyclerView.ViewHolder(view!!), View.OnClickListener {
@@ -189,18 +192,37 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
                 this.book = book
                 nameTextView.text = this.book.name
                 authorTextView.text = this.book.author
-                nameTextView.visibility = View.GONE
-                authorTextView.visibility = View.GONE
+                nameTextView.visibility = View.INVISIBLE
+                authorTextView.visibility = View.INVISIBLE
+                darkeningBlock.visibility = View.INVISIBLE
+                darkeningBlock.alpha = 0.8f
                 imageView.setImageBitmap(this.book.picture)
-
-                imageView.setOnClickListener {
-                    val animFadeIn = AnimationUtils.loadAnimation(context, R.anim.darkening_animation)
-                    darkeningBlock.startAnimation(animFadeIn)
-                }
             }
 
             override fun onClick(p0: View?) {
-                //
+                val fadeIn = AlphaAnimation(0f, 2.5f)
+                fadeIn.interpolator = DecelerateInterpolator()
+                fadeIn.duration = 7000
+
+                val fadeOut = AlphaAnimation(2.5f, 0f)
+                fadeOut.interpolator = AccelerateInterpolator()
+                fadeOut.duration = 3000
+
+                val animation = AnimationSet(false)
+                animation.addAnimation(fadeIn)
+                animation.addAnimation(fadeOut)
+
+                darkeningBlock.visibility = View.VISIBLE
+                nameTextView.visibility = View.VISIBLE
+                authorTextView.visibility = View.VISIBLE
+                darkeningBlock.startAnimation(animation)
+                nameTextView.startAnimation(animation)
+                authorTextView.startAnimation(animation)
+
+                darkeningBlock.visibility = View.INVISIBLE
+                nameTextView.visibility = View.INVISIBLE
+                authorTextView.visibility = View.INVISIBLE
+
             }
         }
     }
