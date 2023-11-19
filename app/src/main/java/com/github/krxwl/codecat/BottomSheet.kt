@@ -66,7 +66,7 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
             val adapter = CarouselAdapter(ArrayList(books))
             adapter.submitList(ArrayList(books))
             binding.carouselRecyclerView.adapter = adapter
-           // binding.loading.visibility = View.GONE
+            binding.loading.visibility = View.GONE
         }
 
         val carouselLayoutManager = CarouselLayoutManager()
@@ -129,27 +129,44 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
                         val author = (map["authors"] as List<*>)[0] as String
                         val title = map["title"] as String
                         val image = (map["imageLinks"] as Map<*, *>)["medium"]
-                        Glide.with(context!!)
-                            .asBitmap()
-                            .load(image)
-                            .into(object : CustomTarget<Bitmap>() {
-                                override fun onLoadFailed(errorDrawable: Drawable?) {
-                                    Log.i(TAG, "ошибка загрузки")
-                                }
+                            Glide.with(context!!)
+                                .asBitmap()
+                                .load(image)
+                                .into(object : CustomTarget<Bitmap>() {
+                                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                                        Log.i(TAG, "ошибка загрузки")
+                                    }
 
-                                override fun onResourceReady(resource: Bitmap,
-                                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
-                                ) {
-                                    booksArrayList.add(Book(author = author, name = title, picture = resource))
-                                    books.value = booksArrayList
-                                }
+                                    override fun onResourceReady(
+                                        resource: Bitmap,
+                                        transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
+                                    ) {
+                                        var flag = false
+                                        Log.i(TAG, "ARR ${booksArrayList}")
+                                        for (book in booksArrayList) {
+                                            Log.i(TAG, "цикл")
+                                            Log.i(TAG, "${book.author} ${author}")
+                                            if (book.author == author) {
+                                                flag = true
+                                                Log.i(TAG, "НАШЕЛ ТАЙТЛ")
+                                                break
+                                            }
+                                        }
+                                        if (!flag) {
+                                            booksArrayList.add(
+                                                Book(
+                                                    author = author, name = title,
+                                                    picture = resource
+                                                )
+                                            )
+                                        }
+                                        books.value = booksArrayList
+                                    }
 
-                                override fun onLoadCleared(placeholder: Drawable?) {}
-                            })
-
-                        Log.i(TAG, "что мы получили $author $title $image")
+                                    override fun onLoadCleared(placeholder: Drawable?) {}
+                                })
                     } catch (ex: NullPointerException) {
-                        Log.i(TAG, "нет картинки, скипаем")
+                        Log.i(TAG, "нет картинки, скипаем ${ex.message}")
                     }
                     //books.add(Book())
                 }
