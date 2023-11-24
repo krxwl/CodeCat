@@ -13,4 +13,5 @@ data class Submodule(@PrimaryKey val id: Int?,
                      @ColumnInfo(defaultValue = "0") var progress: Int? = 0,
                      val name: String?,
                      val module: Int?,
-                    val type: String?)
+                    val type: String?,
+                    var savedTaskId: Int?)
