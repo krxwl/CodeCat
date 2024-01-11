@@ -1,4 +1,4 @@
-package com.github.krxwl.codecat
+package com.github.krxwl.codecat.activities.registrationactivity
 
 import android.app.Activity
 import android.content.Context

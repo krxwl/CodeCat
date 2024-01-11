@@ -58,11 +58,13 @@ android {
 
 dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.core:core-ktx:+")
+    implementation("androidx.core:core-ktx:+")
     val nav_version = "2.7.3"
     implementation("androidx.core:core-ktx:1.10.1")
-
+    implementation("com.google.android.material:material:1.11.0-alpha01")
     implementation("com.google.android.material:material:1.10.0")
-
+    implementation("io.github.amrdeveloper:codeview:1.3.8")
     implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
     implementation("com.google.firebase:firebase-database-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")

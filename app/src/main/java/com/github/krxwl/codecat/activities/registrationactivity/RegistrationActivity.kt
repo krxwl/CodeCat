@@ -1,13 +1,11 @@
-package com.github.krxwl.codecat
+package com.github.krxwl.codecat.activities.registrationactivity
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import java.util.Arrays
-
-private const val TAG = "RegistrationActivity"
+import com.github.krxwl.codecat.activities.registrationactivity.FirstQuestionFragment
+import com.github.krxwl.codecat.R
+import com.github.krxwl.codecat.SecondQuestionFragment
 
 class RegistrationActivity : AppCompatActivity(), FirstQuestionFragment.Callbacks,
     SecondQuestionFragment.Callbacks {
@@ -43,7 +41,7 @@ class RegistrationActivity : AppCompatActivity(), FirstQuestionFragment.Callback
     }
 
     override fun userRegistered() {
-        setResult(Activity.RESULT_OK)
+        setResult(RESULT_OK)
         finish()
     }
 

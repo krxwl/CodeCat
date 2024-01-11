@@ -11,4 +11,7 @@
     <color name="violet">#1c1b1f</color>
     <color name="dark_violet">#282134</color>
     <color name="dark_violet_two">#3c1642</color>
+    <color name="silver">#545059</color>
+    <color name="green">#3cb371</color>
+    <color name="dark_grey">#1a1a1a</color>
 </resources>

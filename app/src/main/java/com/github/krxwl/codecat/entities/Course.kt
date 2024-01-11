@@ -1,4 +1,4 @@
-package com.github.krxwl.codecat
+package com.github.krxwl.codecat.entities
 
 import android.graphics.Bitmap
 import androidx.room.ColumnInfo

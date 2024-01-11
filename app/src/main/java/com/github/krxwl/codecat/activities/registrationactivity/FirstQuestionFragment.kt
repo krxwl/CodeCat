@@ -1,4 +1,4 @@
-package com.github.krxwl.codecat
+package com.github.krxwl.codecat.activities.registrationactivity
 
 import android.content.Context
 import android.os.Bundle
@@ -7,18 +7,16 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.github.krxwl.codecat.R
 import com.github.krxwl.codecat.databinding.FragmentStepOneBinding
 import com.google.android.material.snackbar.Snackbar
 
-//ключи к viewmodel
 private const val KEY_EMAIL_TEXT = "emailText"
 private const val KEY_PASSWORD_TEXT = "passwordText"
 private const val TAG = "FirstQuestionFragment"
-
 class FirstQuestionFragment : Fragment(R.layout.fragment_step_one) {
 
     private val registrationViewModel: RegistrationViewModel by lazy {

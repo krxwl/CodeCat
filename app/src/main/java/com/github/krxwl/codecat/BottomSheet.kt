@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.AlphaAnimation
 import android.view.animation.AnimationSet
-import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.github.krxwl.codecat.databinding.BottomSheetBinding
+import com.github.krxwl.codecat.entities.Book
+import com.github.krxwl.codecat.entities.Course
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.MultiBrowseCarouselStrategy

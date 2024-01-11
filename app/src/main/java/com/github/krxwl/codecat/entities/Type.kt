@@ -1,4 +1,4 @@
-package com.github.krxwl.codecat
+package com.github.krxwl.codecat.entities
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo

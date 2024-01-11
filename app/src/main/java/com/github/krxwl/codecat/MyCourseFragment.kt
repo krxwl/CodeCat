@@ -1,7 +1,7 @@
 package com.github.krxwl.codecat
 
 import android.annotation.SuppressLint
-import android.graphics.BitmapFactory
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.switchMap
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,11 +22,22 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.krxwl.codecat.customspinner.CustomAdapter
 import com.github.krxwl.codecat.customspinner.CustomItem
+import com.github.krxwl.codecat.database.CourseRepository
 import com.github.krxwl.codecat.databinding.MyCourseFragmentBinding
+import com.github.krxwl.codecat.entities.Submodule
+import com.github.krxwl.codecat.entities.Task
+import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.MaterialSharedAxis
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
 private const val TAG = "MyCourseFragment"
 class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
+    interface Callbacks {
+        fun onSubmoduleSelected(tasks: List<Task>)
+    }
+
+    private var callbacks: Callbacks? = null
+
 
     lateinit var binding: MyCourseFragmentBinding
     lateinit var customArrayList: ArrayList<CustomItem>
@@ -42,6 +52,7 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
     ): View {
         binding = MyCourseFragmentBinding.inflate(layoutInflater)
 
+
         binding.recyclerview.layoutManager = LinearLayoutManager(context)
         binding.recyclerview.adapter = adapter
 
@@ -49,7 +60,6 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                //myCourseViewModel.submodulesListLiveData = myCourseViewModel.courseRepository.getSubmodules(position)
                 myCourseViewModel.setIndex(position)
             }
         }
@@ -60,6 +70,11 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
         val adapter = SubmodulesAdapter(ArrayList(submodules))
         adapter.submitList(ArrayList(submodules))
         binding.recyclerview.adapter = adapter
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks?
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,9 +107,15 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
             viewLifecycleOwner,
             androidx.lifecycle.Observer { submodules ->
                 submodules?.let {
-                    Log.i(TAG, "submodules:${submodules}")
                     updateUI(submodules)
                 }
+            }
+        )
+
+        myCourseViewModel.tasksListLiveData.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer { tasks ->
+                callbacks?.onSubmoduleSelected(tasks)
             }
         )
     }
@@ -106,13 +127,6 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
         }
 
         override fun getItemCount(): Int = submodules.size
-
-        /*override fun submitList(list: MutableList<Course>?) {
-            if (list == courses) {
-                return
-            }
-            super.submitList(list)
-        }*/
 
         override fun onCreateViewHolder(
             parent: ViewGroup,
@@ -136,8 +150,9 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
 
             @SuppressLint("UseCompatLoadingForDrawables")
             fun bind(submodule: Submodule) {
+                this.submodule = submodule
                 nameTextView.text = submodule.name
-                circularProgressBar.progress = 0.toFloat()!!
+                circularProgressBar.progress = 0.toFloat()
                 if (submodule.type == "task") {
                     imageView.setImageDrawable(resources.getDrawable(R.drawable.task))
                 } else {
@@ -148,7 +163,9 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
             }
 
             override fun onClick(p0: View?) {
-                //callbacks?.onCourseSelected(this.submodule)
+                if (submodule.type.toString() == "task") {
+                    myCourseViewModel.setSubmoduleId(submodule.id)
+                }
             }
         }
     }
@@ -173,12 +190,20 @@ class MyCourseViewModel(
 ) : ViewModel() {
     val courseRepository = CourseRepository.get()
     val courseListLiveData = courseRepository.getCourses()
-    var submodulesListLiveData: LiveData<List<Submodule>> = state.getLiveData<Int>("index").switchMap {id ->
+    var submodulesListLiveData: LiveData<List<Submodule>> = state.getLiveData<Int>("index").switchMap { id ->
         courseRepository.getSubmodules(id + 1)
     }
+    var tasksListLiveData: LiveData<List<Task>> = state.getLiveData<Int>("id").switchMap { id ->
+        courseRepository.getTasks(id)
+    }
+    //viewmodel с savedstatehandle-ом позволяет при каждом изменении переменной отправлять запрос к бд
     fun setIndex(index: Int) {
         state["index"] = index
     }
 
     fun getIndex(): Int? = state["index"]
+
+    fun setSubmoduleId(id: Int) {
+        state["id"] = id
+    }
 }

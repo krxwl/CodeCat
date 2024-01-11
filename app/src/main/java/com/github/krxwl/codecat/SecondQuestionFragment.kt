@@ -2,19 +2,17 @@ package com.github.krxwl.codecat
 
 import android.content.Context
 import android.os.Bundle
-import android.provider.CallLog
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.github.krxwl.codecat.activities.registrationactivity.RegistrationViewModel
 import com.github.krxwl.codecat.databinding.FragmentStepTwoBinding
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

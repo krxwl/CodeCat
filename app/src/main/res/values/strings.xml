@@ -1,37 +1,38 @@
 <resources>
     <string name="app_name">CodeCat</string>
-    <string name="my_course">My Course</string>
-    <string name="all_courses">All Courses</string>
-    <string name="profile">Profile</string>
+    <string name="my_course">Мой курс</string>
+    <string name="all_courses">Все курсы</string>
+    <string name="profile">Профиль</string>
     <string name="CodeCat">CodeCat</string>
     <string name="side_sheet">side sheet</string>
 
-    <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="email">Почта</string>
+    <string name="password">Пароль</string>
     
     <string name="first_question">1 / 2</string>
-    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_email">Введите свою почту</string>
     <string name="second_question">2 / 2</string>
 
-    <string name="helper_text_password">The minimum password length is 8 characters.</string>
+    <string name="helper_text_password">Минимальная длина пароля - 8 символов</string>
 
-    <string name="login">Log In</string>
-    <string name="forgot_password">Forgot password?</string>
+    <string name="login">Войти</string>
+    <string name="forgot_password">Забыли пароль?</string>
     <string name="run_course">Запустить курс</string>
 
     <string name="recommended_literature">Рекомендуемая литература</string>
+    <string name="input_data">Входные данные</string>
+    <string name="output_data">Выходные данные</string>
 
-    <string name="too_short_password">Too short password</string>
+    <string name="too_short_password">Слишком короткий пароль</string>
 
-    <string name="register">Register</string>
-    <string name="authentication_failed">Authentication failed</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="authentication_failed">Ошибка авторизации</string>
 
-    <string name="swipe_left">Swipe left to see the next question</string>
-    <string name="enter_an_email">Enter an email</string>
-    <string name="enter_the_correct_email">Enter the correct email</string>
-    <string name="enter_your_password">Enter your password</string>
-    <string name="successfully_loggedin">Successfully Logged In</string>
-    <string name="login_failed">Log In failed</string>
-    <string name="next_step">Next step</string>
+    <string name="enter_an_email">Введите почту</string>
+    <string name="enter_the_correct_email">Почта введена некорректно</string>
+    <string name="enter_your_password">Введите пароль</string>
+    <string name="successfully_loggedin">Авторизация успешна</string>
+    <string name="login_failed">Не удалось авторизоваться</string>
+    <string name="next_step">Следующий шаг</string>
     <string name="programming_language_logo">programming language logo</string>
 </resources>

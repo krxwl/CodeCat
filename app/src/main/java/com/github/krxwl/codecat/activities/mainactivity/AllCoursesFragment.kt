@@ -1,14 +1,11 @@
-package com.github.krxwl.codecat
+package com.github.krxwl.codecat.activities.mainactivity
 
 import android.content.Context
-import android.graphics.BitmapFactory
-import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -18,10 +15,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.github.krxwl.codecat.database.CourseRepository
+import com.github.krxwl.codecat.R
 import com.github.krxwl.codecat.databinding.AllCoursesFragmentBinding
+import com.github.krxwl.codecat.entities.Course
+import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.MaterialSharedAxis
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
-private val TAG = "AllCoursesFragment"
+private const val TAG = "AllCoursesFragment"
 
 class AllCoursesFragment : Fragment(R.layout.all_courses_fragment) {
 
@@ -42,7 +44,7 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_fragment) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = AllCoursesFragmentBinding.inflate(layoutInflater, container, false)
 
         binding.allCoursesRecyclerview.layoutManager = LinearLayoutManager(context)
@@ -76,8 +78,10 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_fragment) {
         callbacks = context as Callbacks?
     }
 
-    inner class CourseAdapter(var courses: ArrayList<Course>) : ListAdapter<Course, CourseAdapter.CourseHolder>(LinkDiffCallback()) {
-        override fun onBindViewHolder(holder: CourseAdapter.CourseHolder, position: Int) {
+    inner class CourseAdapter(var courses: ArrayList<Course>) : ListAdapter<Course, CourseAdapter.CourseHolder>(
+        LinkDiffCallback()
+    ) {
+        override fun onBindViewHolder(holder: CourseHolder, position: Int) {
             val course = courses[position]
             holder.bind(course)
         }
@@ -94,7 +98,7 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_fragment) {
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-        ): CourseAdapter.CourseHolder {
+        ): CourseHolder {
             return CourseHolder(layoutInflater.inflate(R.layout.all_courses_item, parent, false))
         }
 

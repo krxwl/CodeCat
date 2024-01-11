@@ -1,4 +1,4 @@
-package com.github.krxwl.codecat
+package com.github.krxwl.codecat.activities.loginactivity
 
 import android.app.Activity
 import android.content.Intent
@@ -9,6 +9,8 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.github.krxwl.codecat.R
+import com.github.krxwl.codecat.activities.registrationactivity.RegistrationActivityContract
 import com.github.krxwl.codecat.databinding.FragmentAuthenticationBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth

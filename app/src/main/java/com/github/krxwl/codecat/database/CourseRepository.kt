@@ -1,9 +1,11 @@
-package com.github.krxwl.codecat
+package com.github.krxwl.codecat.database
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
-import com.github.krxwl.codecat.database.CourseDatabase
+import com.github.krxwl.codecat.entities.Course
+import com.github.krxwl.codecat.entities.Submodule
+import com.github.krxwl.codecat.entities.Task
 import java.lang.IllegalStateException
 import java.util.concurrent.Executors
 
@@ -13,7 +15,8 @@ class CourseRepository private constructor(context: Context) {
     private val database : CourseDatabase = Room.databaseBuilder(
         context.applicationContext,
         CourseDatabase::class.java,
-        DATABASE_NAME).build()
+        DATABASE_NAME
+    ).build()
 
     private val courseDao = database.courseDao()
 
@@ -27,6 +30,18 @@ class CourseRepository private constructor(context: Context) {
 
     fun getCourses(): LiveData<List<Course>> {
         return courseDao.getCourses()
+    }
+
+    fun getDefaultTaskId(id: Int): LiveData<Int> {
+        return courseDao.getDefaultTaskId(id)
+    }
+
+    fun commitSavedTaskId(submoduleId: Int, savedTaskId: Int) {
+        return courseDao.commitSavedTaskId(submoduleId, savedTaskId)
+    }
+
+    fun getTasks(id: Int): LiveData<List<Task>> {
+        return courseDao.getTasks(id)
     }
 
     fun getSubmodules(id: Int): LiveData<List<Submodule>> {
