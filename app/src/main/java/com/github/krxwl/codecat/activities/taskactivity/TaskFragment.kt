@@ -26,7 +26,6 @@ class TaskFragment(val task: Task) : Fragment(R.layout.task_fragment) {
         exitTransition = MaterialFadeThrough().apply {
             duration = 300L
         }
-
         binding.taskNameTextview.text = task.taskName
         binding.taskText.text = task.task
         binding.inputData.text = task.input

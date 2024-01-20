@@ -26,8 +26,6 @@ import com.github.krxwl.codecat.database.CourseRepository
 import com.github.krxwl.codecat.databinding.MyCourseFragmentBinding
 import com.github.krxwl.codecat.entities.Submodule
 import com.github.krxwl.codecat.entities.Task
-import com.google.android.material.transition.MaterialFadeThrough
-import com.google.android.material.transition.MaterialSharedAxis
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
 private const val TAG = "MyCourseFragment"

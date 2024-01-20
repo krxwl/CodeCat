@@ -18,6 +18,7 @@ import com.github.krxwl.codecat.activities.taskactivity.TaskActivity
 import com.github.krxwl.codecat.databinding.BottomNavigationMenuBinding
 import com.github.krxwl.codecat.entities.Course
 import com.github.krxwl.codecat.entities.Task
+import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
