@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserratbold"
             android:text="@string/second_question"
-            android:textSize="20sp" />
+            android:textSize="@dimen/_18ssp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -35,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
+                android:textSize="@dimen/_14ssp"
                 android:id="@+id/password_text_input_register"
                 android:inputType="textPassword"/>
 
@@ -46,9 +47,10 @@
         android:id="@+id/register_button"
         style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
         android:padding="10dp"
+        android:textSize="@dimen/_14ssp"
         android:text="@string/register"
+        android:layout_height="@dimen/_50sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

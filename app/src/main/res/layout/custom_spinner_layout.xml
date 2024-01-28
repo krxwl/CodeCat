@@ -12,25 +12,24 @@
 
         <ImageView
             android:id="@+id/language_picture"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:paddingStart="20dp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
+            android:padding="@dimen/_10ssp"
             android:id="@+id/language_name_spinner"
             android:fontFamily="@font/montserratbold"
             tools:text="Kotlin"
-            android:textSize="18sp"/>
+            android:textSize="@dimen/_15sdp"/>
 
     </LinearLayout>
     
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_alignParentEnd="true"
         android:src="@drawable/baseline_keyboard_arrow_down_24"/>
 

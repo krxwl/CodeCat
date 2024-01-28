@@ -25,17 +25,18 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserratbold"
             android:text="@string/first_question"
-            android:textSize="20sp" />
+            android:textSize="@dimen/_18ssp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="50dp">
+            android:padding="@dimen/_45sdp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_your_email"
+                android:textSize="@dimen/_14ssp"
                 android:id="@+id/email_textinput"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -46,9 +47,10 @@
         android:id="@+id/next_step_button"
         style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
         android:padding="10dp"
         android:text="@string/next_step"
+        android:textSize="@dimen/_14ssp"
+        android:layout_height="@dimen/_50sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

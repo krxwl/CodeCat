@@ -16,15 +16,18 @@
     <Button
         style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/_50sdp"
         android:id="@+id/login_button"
-        android:padding="10dp"
+        android:padding="@dimen/_10sdp"
+        android:textSize="@dimen/_13sdp"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -39,49 +42,53 @@
             android:fontFamily="@font/profontwindowsbold"
             android:text="@string/CodeCat"
             android:textColor="@color/white"
-            android:textSize="50sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            android:textSize="@dimen/_47ssp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="@string/CodeCat" />
+
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="50dp"
-            tools:layout_editor_absoluteX="-27dp"
-            tools:layout_editor_absoluteY="549dp">
+            android:gravity="center"
+            android:padding="@dimen/_50sdp">
+
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                android:hint="@string/email">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
                     android:id="@+id/email_text_input"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/_13ssp"
                     android:layout_height="wrap_content"
-                    android:hint=""/>
+                    android:hint="" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/_3sdp"
+
                 android:hint="@string/password"
-                app:endIconMode="password_toggle"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                app:endIconMode="password_toggle">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
                     android:id="@+id/password_text_input"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/_13ssp"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    />
+                    android:inputType="textPassword" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -93,32 +100,32 @@
 
 
                 <Button
-                    android:layout_width="wrap_content"
                     android:id="@+id/register_button"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:text="@string/register"
-                    android:textSize="12sp"
-                    style="@style/Widget.Material3.Button.ElevatedButton"
                     android:gravity="right"
                     android:paddingRight="0dp"
+                    android:text="@string/register"
+                    android:textSize="@dimen/_10ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/forgot_password_button"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:text="@string/forgot_password"
-                    android:textSize="12sp"
+                    android:gravity="left"
                     android:paddingLeft="0dp"
-                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:text="@string/forgot_password"
+                    android:textSize="@dimen/_10ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:gravity="left"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

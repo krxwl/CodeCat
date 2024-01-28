@@ -8,6 +8,8 @@
 
     <string name="email">Почта</string>
     <string name="password">Пароль</string>
+
+    <string name="check_answer">Отправить на проверку</string>
     
     <string name="first_question">1 / 2</string>
     <string name="enter_your_email">Введите свою почту</string>

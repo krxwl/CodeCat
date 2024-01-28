@@ -9,7 +9,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
     android:clipToPadding="true">
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <FrameLayout
@@ -23,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/language_imageview"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserratbold"
-                android:textSize="25sp"
+                android:textSize="@dimen/_20ssp"
                 app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
                 app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
                 app:layout_constraintTop_toTopOf="parent"
@@ -41,8 +41,8 @@
 
             <com.mikhaellopez.circularprogressbar.CircularProgressBar
                 android:id="@+id/circularProgressBar"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
                 android:layout_marginTop="40dp"
                 app:cpb_background_progressbar_color="#b6bbd8"
                 app:cpb_background_progressbar_width="15dp"
@@ -55,8 +55,8 @@
 
             <ImageButton
                 android:id="@+id/imageButton2"
-                android:layout_width="130dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:background="@drawable/run_button"
                 android:contentDescription="@string/run_course"
                 android:src="@drawable/baseline_play_arrow_24"
@@ -67,10 +67,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:id="@+id/language_description"
                 android:fontFamily="@font/montserratbold"
-                android:textSize="15sp"
+                android:textSize="@dimen/_13ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageButton2"
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserratbold"
-                android:textSize="20sp"
+                android:textSize="@dimen/_18ssp"
                 app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
                 app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
                 app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
@@ -92,17 +92,17 @@
                 android:id="@+id/recommended_literature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:fontFamily="@font/montserratbold"
                 android:text="@string/recommended_literature"
-                android:textSize="20sp"
+                android:textSize="@dimen/_15ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/language_description" />
 
             <com.tuyenmonkey.mkloader.MKLoader
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:id="@+id/loading"
                 app:layout_constraintBottom_toBottomOf="@+id/carousel_recycler_view"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -113,8 +113,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/carousel_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="@dimen/_210sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 app:layout_constraintTop_toBottomOf="@+id/recommended_literature" />
@@ -122,5 +122,5 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

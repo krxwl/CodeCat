@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="60dp"
+        android:layout_width="@dimen/_45sdp"
         android:layout_height="match_parent"
         android:id="@+id/task_recyclerview"
-        android:backgroundTint="@color/violet"/>
+        android:backgroundTint="@color/black"/>
 
     <FrameLayout
         android:layout_width="match_parent"

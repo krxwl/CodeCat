@@ -76,7 +76,6 @@ class FirstQuestionFragment : Fragment(R.layout.fragment_step_one) {
         Log.i(TAG, "вернулись")
     }
 
-    // вызывается когда фрагмент прикрепляется к activity
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks?

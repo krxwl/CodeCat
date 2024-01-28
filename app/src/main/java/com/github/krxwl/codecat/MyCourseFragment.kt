@@ -29,7 +29,7 @@ import com.github.krxwl.codecat.entities.Task
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
 private const val TAG = "MyCourseFragment"
-class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
+class MyCourseFragment : Fragment(R.layout.my_course_fragment) {
     interface Callbacks {
         fun onSubmoduleSelected(tasks: List<Task>)
     }

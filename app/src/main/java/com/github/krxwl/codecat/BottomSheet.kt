@@ -1,5 +1,6 @@
 package com.github.krxwl.codecat
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -26,7 +27,7 @@ import com.github.krxwl.codecat.entities.Book
 import com.github.krxwl.codecat.entities.Course
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.carousel.CarouselLayoutManager
-import com.google.android.material.carousel.MultiBrowseCarouselStrategy
+import com.google.android.material.carousel.UncontainedCarouselStrategy
 import com.google.gson.Gson
 import okhttp3.Call
 import okhttp3.Callback
@@ -49,6 +50,7 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
     var books: MutableLiveData<ArrayList<Book>> = MutableLiveData<ArrayList<Book>>()
     var booksArrayList = ArrayList<Book>()
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,7 +73,7 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
         }
 
         val carouselLayoutManager = CarouselLayoutManager()
-        carouselLayoutManager.setCarouselStrategy(MultiBrowseCarouselStrategy())
+        carouselLayoutManager.setCarouselStrategy(UncontainedCarouselStrategy())
         binding.carouselRecyclerView.layoutManager = carouselLayoutManager
 
         return binding.root
