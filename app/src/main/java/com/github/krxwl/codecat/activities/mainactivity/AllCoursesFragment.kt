@@ -106,8 +106,6 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_fragment) {
 
             private val nameTextView: TextView = itemView.findViewById(R.id.language_name)
             private val imageButton: ImageView = itemView.findViewById(R.id.logo_language)
-            private val progressTextView: TextView = itemView.findViewById(R.id.textview_progress)
-            private val circularProgressBar: CircularProgressBar = itemView.findViewById(R.id.circularProgressBar)
 
             init {
                 itemView.setOnClickListener(this)
@@ -116,10 +114,8 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_fragment) {
             fun bind(course: Course) {
                 this.course = course
                 nameTextView.text = this.course.name
-                circularProgressBar.progress = this.course.progress?.toFloat()!!
                 imageButton.setImageBitmap(this.course.image)
                 // TODO("НОВАЯ КОЛОНКА В БД")
-                progressTextView.setText("${this.course.progress}/15")
             }
 
             override fun onClick(p0: View?) {

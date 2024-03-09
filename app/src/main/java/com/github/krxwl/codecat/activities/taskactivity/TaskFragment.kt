@@ -44,25 +44,14 @@ class TaskFragment(val task: Task) : Fragment(R.layout.task_fragment) {
         enterTransition = MaterialFadeThrough().apply {
             duration = 300L
         }
-        exitTransition = MaterialFadeThrough().apply {
-            duration = 300L
-        }
         binding.taskNameTextview.text = task.taskName
         binding.taskText.text = task.task
         binding.inputData.text = task.input
         binding.outputData.text = task.output
 
         binding.checkAnswerButton.setOnClickListener {
+            val service = retrofit.create(RetrofitInterface::class.java)
 
-
-           val service = this.retrofit.create(RetrofitInterface::class.java)
-
-            /*val params = mapOf("clientId" to "8a311ba4cc1b8e70d1ff57b5d42bfbac",
-                "clientSecret" to "b6a55384af2bf3344a282f9bb5d5a1cce6d72e3664df745d3bd941fb5956c533",
-                "script" to binding.codeView.text.toString(),
-                "stdin" to "",
-                "language" to "python3",
-                 "versionIndex" to "0")*/
             val answerData = AnswerData("8a311ba4cc1b8e70d1ff57b5d42bfbac",
                 "b6a55384af2bf3344a282f9bb5d5a1cce6d72e3664df745d3bd941fb5956c533",
                 binding.codeView.text.toString(),
@@ -70,28 +59,10 @@ class TaskFragment(val task: Task) : Fragment(R.layout.task_fragment) {
                 "python3",
                 "0")
 
-
-
             CoroutineScope(Dispatchers.IO).launch {
                 val call: AnswerResult = service.executeProgram(answerData)
-                Log.i(TAG, "РЕКВЕСТ" + call.output)
+                Log.i(TAG, "ПОЛУЧИЛ ${call}")
             }
-            /*CoroutineScope(Dispatchers.IO).launch {
-                val call: Call<AnswerResult> = service.executeProgram(answerData)
-                call.enqueue(object : Callback<AnswerResult> {
-                    override fun onResponse(
-                        call: Call<AnswerResult>,
-                        response: Response<AnswerResult>
-                    ) {
-                        Log.i(TAG, "приветики ${response.body()}")
-                    }
-
-                    override fun onFailure(call: Call<AnswerResult>, t: Throwable) {
-                        TODO("Not yet implemented")
-                    }
-                })
-            }*/
-
         }
 
         binding.codeView.setEnableHighlightCurrentLine(true)

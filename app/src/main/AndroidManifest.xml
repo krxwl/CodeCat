@@ -14,12 +14,12 @@
         android:name=".CodeCatApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Material3.Dark.NoActionBar"
+        android:theme="@style/Theme.CodeCat"
         tools:targetApi="31">
         <activity
             android:name=".activities.mainactivity.MainActivity"
             android:exported="true"
-            android:theme="@style/Launcher">
+            android:theme="@style/Theme.CodeCat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +31,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="com.github.krxwl.codecat.LoginActivity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

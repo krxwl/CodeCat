@@ -57,9 +57,8 @@ android {
 }
 
 dependencies {
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
-    implementation("androidx.core:core-ktx:+")
-    implementation("androidx.core:core-ktx:+")
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     val nav_version = "2.7.3"
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("com.google.android.material:material:1.11.0")
@@ -82,6 +81,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.appcompat:appcompat:1.6.1")
+
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
@@ -95,8 +95,6 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation ("androidx.room:room-runtime:2.2.4")
     kapt("androidx.room:room-compiler:2.2.4")
-    implementation("android.arch.navigation:navigation-fragment-ktx:1.0.0")
-    implementation("android.arch.navigation:navigation-ui-ktx:1.0.0")
 
     implementation("com.tuyenmonkey:mkloader:1.4.0")
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")

@@ -30,8 +30,9 @@
             android:fontFamily="@font/montserratbold"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintBottom_toBottomOf="@+id/view"
-            app:layout_constraintEnd_toStartOf="@+id/circularProgressBar"
-            app:layout_constraintStart_toEndOf="@+id/logo_language"
+
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/view"
             tools:text="Python" />
 
@@ -61,34 +62,6 @@
             app:layout_constraintEnd_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/view"
             android:contentDescription="@string/programming_language_logo" />
-
-        <com.mikhaellopez.circularprogressbar.CircularProgressBar
-            android:id="@+id/circularProgressBar"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginEnd="@dimen/_45sdp"
-            app:cpb_background_progressbar_color="#b6bbd8"
-            app:cpb_background_progressbar_width="@dimen/_5sdp"
-            app:cpb_progress_direction="to_right"
-            app:cpb_progressbar_color="#8BC34A"
-            app:cpb_progressbar_width="@dimen/_5sdp"
-            app:cpb_round_border="false"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintTop_toTopOf="@+id/view" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratbold"
-            android:textSize="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
-            app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-            app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-            app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
-            android:id="@+id/textview_progress"
-            tools:text="5/10" />
 
 
 

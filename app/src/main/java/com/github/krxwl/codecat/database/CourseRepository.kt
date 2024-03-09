@@ -1,6 +1,7 @@
 package com.github.krxwl.codecat.database
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.github.krxwl.codecat.entities.Course
@@ -16,7 +17,7 @@ class CourseRepository private constructor(context: Context) {
         context.applicationContext,
         CourseDatabase::class.java,
         DATABASE_NAME
-    ).build()
+    ).createFromAsset("databases.db").build()
 
     private val courseDao = database.courseDao()
 
@@ -56,6 +57,7 @@ class CourseRepository private constructor(context: Context) {
 
         // если еще не создан то создаем репозиторий
         fun initialize(context: Context) {
+            Log.i("", "инициализирую")
             if (INSTANCE == null) {
                 INSTANCE = CourseRepository(context)
             }

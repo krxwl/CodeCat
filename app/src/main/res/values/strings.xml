@@ -14,10 +14,12 @@
     <string name="first_question">1 / 2</string>
     <string name="enter_your_email">Введите свою почту</string>
     <string name="second_question">2 / 2</string>
-
+    <string name="first">Впервые? тогда</string>
     <string name="helper_text_password">Минимальная длина пароля - 8 символов</string>
 
-    <string name="login">Войти</string>
+    <string name="signin">Вход</string>
+    <string name="signin2">Авторизуйтесь, чтобы приступить к изучению языков программирования.</string>
+    <string name="signin3">Войти</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="run_course">Запустить курс</string>
 
@@ -36,5 +38,6 @@
     <string name="successfully_loggedin">Авторизация успешна</string>
     <string name="login_failed">Не удалось авторизоваться</string>
     <string name="next_step">Следующий шаг</string>
+    <string name="check">Проверить</string>
     <string name="programming_language_logo">programming language logo</string>
 </resources>

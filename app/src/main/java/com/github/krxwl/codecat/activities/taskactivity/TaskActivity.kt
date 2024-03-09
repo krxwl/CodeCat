@@ -52,6 +52,7 @@ class TaskActivity : AppCompatActivity() {
         binding.taskRecyclerview.layoutManager = LinearLayoutManager(applicationContext)
 
         taskViewModel.oldSavedTaskId!!.observe(this) { id ->
+
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_place)
 
             if (id != null) {
@@ -133,8 +134,7 @@ class TaskActivity : AppCompatActivity() {
             return TaskHolder(layoutInflater.inflate(R.layout.task_recyclerview_item, parent, false))
         }
 
-        inner class TaskHolder(view: View?) : RecyclerView.ViewHolder(view!!),
-            View.OnClickListener {
+        inner class TaskHolder(view: View?) : RecyclerView.ViewHolder(view!!), View.OnClickListener {
 
             private lateinit var task: Task
 

@@ -52,14 +52,14 @@
                         android:background="@drawable/cell_shape"
                         android:fontFamily="@font/montserratbold"
                         android:padding="5dip"
-                        android:textSize="@dimen/_13ssp"
+                        android:textSize="@dimen/_12ssp"
                         android:text="@string/input_data" />
 
                     <TextView
                         android:background="@drawable/cell_shape"
                         android:fontFamily="@font/montserratbold"
                         android:padding="5dip"
-                        android:textSize="@dimen/_13ssp"
+                        android:textSize="@dimen/_12ssp"
                         android:text="@string/output_data" />
                 </TableRow>
 
@@ -92,16 +92,29 @@
                 app:layout_constraintStart_toStartOf="@+id/tableLayout"
                 app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
-            <Button
-                android:layout_width="@dimen/_190sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/check_answer_button"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="@dimen/_135sdp"
+                android:layout_height="wrap_content"
+                android:text="@string/check"
                 android:textSize="@dimen/_12ssp"
-                android:text="@string/check_answer"
+                app:icon="@drawable/file_upload"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                app:iconGravity="textStart"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/codeView" />
+
+            <ImageButton
+                android:id="@+id/run_solution_button"
+                android:layout_width="@dimen/_32sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_play_arrow_24"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/codeView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

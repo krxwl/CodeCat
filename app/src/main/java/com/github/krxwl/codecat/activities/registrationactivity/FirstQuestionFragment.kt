@@ -67,7 +67,6 @@ class FirstQuestionFragment : Fragment(R.layout.fragment_step_one) {
                 registrationViewModel.email = binding.emailTextinput.text.toString()
             }
         }
-
         return binding.root
     }
 
