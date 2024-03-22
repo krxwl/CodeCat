@@ -31,7 +31,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar
 private const val TAG = "MyCourseFragment"
 class MyCourseFragment : Fragment(R.layout.my_course_fragment) {
     interface Callbacks {
-        fun onSubmoduleSelected(tasks: List<Task>)
+        fun onSubmoduleSelected(id: Int)
     }
 
     private var callbacks: Callbacks? = null
@@ -109,13 +109,6 @@ class MyCourseFragment : Fragment(R.layout.my_course_fragment) {
                 }
             }
         )
-
-        myCourseViewModel.tasksListLiveData.observe(
-            viewLifecycleOwner,
-            androidx.lifecycle.Observer { tasks ->
-                callbacks?.onSubmoduleSelected(tasks)
-            }
-        )
     }
 
     inner class SubmodulesAdapter(var submodules: ArrayList<Submodule>) : ListAdapter<Submodule, SubmodulesAdapter.SubmoduleHolder>(LinkDiffCallback()) {
@@ -163,6 +156,7 @@ class MyCourseFragment : Fragment(R.layout.my_course_fragment) {
             override fun onClick(p0: View?) {
                 if (submodule.type.toString() == "task") {
                     myCourseViewModel.setSubmoduleId(submodule.id)
+                    callbacks?.onSubmoduleSelected(submodule.id)
                 }
             }
         }

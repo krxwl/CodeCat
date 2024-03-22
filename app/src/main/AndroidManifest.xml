@@ -36,12 +36,13 @@
         </activity>
         <activity
             android:name=".activities.registrationactivity.RegistrationActivity"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.github.krxwl.codecat.RegistrationActivity" />
             </intent-filter>
         </activity>
         <activity
+            android:parentActivityName=".activities.mainactivity.MainActivity"
             android:name=".activities.taskactivity.TaskActivity"
             android:exported="true">
             <intent-filter>

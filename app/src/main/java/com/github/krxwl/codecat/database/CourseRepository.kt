@@ -21,33 +21,19 @@ class CourseRepository private constructor(context: Context) {
 
     private val courseDao = database.courseDao()
 
-    private val executor = Executors.newSingleThreadExecutor()
+    fun updateCourse(course: Course) = courseDao.updateCourse(course)
 
-    fun updateCourse(course: Course) {
-        executor.execute {
-            courseDao.updateCourse(course)
-        }
-    }
+    fun getCourses(): LiveData<List<Course>> = courseDao.getCourses()
 
-    fun getCourses(): LiveData<List<Course>> {
-        return courseDao.getCourses()
-    }
 
-    fun getDefaultTaskId(id: Int): LiveData<Int> {
-        return courseDao.getDefaultTaskId(id)
-    }
+    fun getDefaultTaskId(id: Int): LiveData<Int>?=courseDao.getDefaultTaskId(id)
 
-    fun commitSavedTaskId(submoduleId: Int, savedTaskId: Int) {
-        return courseDao.commitSavedTaskId(submoduleId, savedTaskId)
-    }
+    fun commitSavedTaskId(submoduleId: Int, savedTaskId: Int) = courseDao.commitSavedTaskId(submoduleId, savedTaskId)
 
-    fun getTasks(id: Int): LiveData<List<Task>> {
-        return courseDao.getTasks(id)
-    }
+    fun getTasks(id: Int): LiveData<List<Task>> =courseDao.getTasks(id)
 
-    fun getSubmodules(id: Int): LiveData<List<Submodule>> {
-        return courseDao.getSubmodules(id)
-    }
+
+    fun getSubmodules(id: Int): LiveData<List<Submodule>> =courseDao.getSubmodules(id)
 
     fun getCourse(id: Int): LiveData<Course?> = courseDao.getCourse(id)
 
@@ -57,7 +43,6 @@ class CourseRepository private constructor(context: Context) {
 
         // если еще не создан то создаем репозиторий
         fun initialize(context: Context) {
-            Log.i("", "инициализирую")
             if (INSTANCE == null) {
                 INSTANCE = CourseRepository(context)
             }

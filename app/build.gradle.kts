@@ -95,7 +95,6 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation ("androidx.room:room-runtime:2.2.4")
     kapt("androidx.room:room-compiler:2.2.4")
-
     implementation("com.tuyenmonkey:mkloader:1.4.0")
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
 

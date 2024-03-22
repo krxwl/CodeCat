@@ -59,7 +59,7 @@
                 android:layout_height="@dimen/_40sdp"
                 android:background="@drawable/run_button"
                 android:contentDescription="@string/run_course"
-                android:src="@drawable/baseline_play_arrow_24"
+                android:src="@drawable/baseline_play_arrow_white"
                 app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
                 app:layout_constraintEnd_toEndOf="@+id/language_imageview"
                 app:layout_constraintStart_toStartOf="@+id/language_imageview" />

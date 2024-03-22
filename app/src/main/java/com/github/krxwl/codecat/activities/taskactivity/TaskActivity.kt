@@ -2,18 +2,15 @@ package com.github.krxwl.codecat.activities.taskactivity
 
 import android.content.Intent
 import android.os.Bundle
-import android.transition.Transition
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +21,6 @@ import com.github.krxwl.codecat.activities.mainactivity.MainActivity
 import com.github.krxwl.codecat.database.CourseRepository
 import com.github.krxwl.codecat.databinding.TaskActivityBinding
 import com.github.krxwl.codecat.entities.Task
-import com.google.android.material.transition.MaterialFadeThrough
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -35,69 +31,74 @@ class TaskActivity : AppCompatActivity() {
     private lateinit var binding: TaskActivityBinding
     private lateinit var adapter: TaskAdapter
 
-    private val taskViewModel: TaskViewModel by lazy {
-        ViewModelProvider(this)[TaskViewModel::class.java]
-    }
+    private val taskViewModel: TaskViewModel by viewModels()
 
-    var tasksArrayList: ArrayList<Task>? = null
-    var submoduleId: Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = TaskActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        tasksArrayList = intent.extras?.getParcelableArrayList<Task>("tasks")
-        submoduleId = tasksArrayList?.get(0)?.submodule!!
-        taskViewModel.oldSavedTaskId = taskViewModel.courseRepository.getDefaultTaskId(tasksArrayList?.get(0)?.submodule!!)
-        binding.taskRecyclerview.layoutManager = LinearLayoutManager(applicationContext)
+        taskViewModel.submoduleId = intent.extras?.getInt("submoduleId")!!
+        taskViewModel.tasksLiveData = taskViewModel.getTasks(taskViewModel.submoduleId)
 
-        taskViewModel.oldSavedTaskId!!.observe(this) { id ->
 
-            val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_place)
 
-            if (id != null) {
-                adapter = TaskAdapter(tasksArrayList!!, id)
-                var currentTask: Task? = null
-                for (task in tasksArrayList!!) {
-                    if (task.id == id) {
-                        currentTask = task
+        taskViewModel.tasksLiveData?.observe(this
+        ) { tasks ->
+            taskViewModel.tasksArrayList = tasks as ArrayList<Task>
+            taskViewModel.getDefaultTaskId(taskViewModel.submoduleId)
+
+            taskViewModel.oldSavedTaskId?.observe(this) { defaultTask ->
+                val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_place)
+                Log.i(TAG, taskViewModel.tasksArrayList.toString())
+                if (defaultTask != null) {
+                    adapter = TaskAdapter(taskViewModel.tasksArrayList, defaultTask)
+                    var currentTask: Task? = null
+                    for (task in taskViewModel.tasksArrayList) {
+                        if (task.id == defaultTask) {
+                            currentTask = task
+                        }
+                    }
+                    Log.i(TAG, "${currentTask}")
+                    if (currentFragment == null) {
+                        supportFragmentManager.beginTransaction()
+                            .add(R.id.fragment_place, TaskFragment(currentTask!!)).commit()
+                    }
+                } else {
+                    adapter = TaskAdapter(
+                        taskViewModel.tasksArrayList,
+                        taskViewModel.tasksArrayList.get(0).id
+                    )
+
+                    if (currentFragment == null) {
+                        supportFragmentManager.beginTransaction()
+                            .add(R.id.fragment_place, TaskFragment(taskViewModel.tasksArrayList[0]))
+                            .commit()
                     }
                 }
-
-                if (currentFragment == null) {
-                    supportFragmentManager.beginTransaction()
-                        .add(R.id.fragment_place, TaskFragment(currentTask!!)).commit()
-                }
-            } else {
-                adapter = TaskAdapter(tasksArrayList!!, tasksArrayList!![0].id!!)
-
-                if (currentFragment == null) {
-                    supportFragmentManager.beginTransaction()
-                        .add(R.id.fragment_place, TaskFragment(tasksArrayList!![0])).commit()
-                }
+                binding.taskRecyclerview.adapter = adapter
             }
-
-            binding.taskRecyclerview.adapter = adapter
         }
+        binding.taskRecyclerview.layoutManager = LinearLayoutManager(applicationContext)
+
 
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.i(TAG, "ЗАВЕРШАЮСЬ ")
-            if (taskViewModel.newSavedTaskId != taskViewModel.oldSavedTaskId?.value) {
-                lifecycleScope.launch(Dispatchers.IO) {
-                    taskViewModel.courseRepository.commitSavedTaskId(
-                        submoduleId!!,
-                        taskViewModel.newSavedTaskId!!
-                    )
-                }
+    override fun onStop() {
+        super.onStop()
+        if (taskViewModel.newSavedTaskId != taskViewModel.oldSavedTaskId?.value && taskViewModel.newSavedTaskId != null) {
+            lifecycleScope.launch(Dispatchers.IO) {
+                taskViewModel.commitSavedTaskId(taskViewModel.submoduleId, taskViewModel.newSavedTaskId!!)
+                Log.i(TAG, "Я ВЫПОЛНИЛ ${taskViewModel.newSavedTaskId}")
             }
-            val i = Intent(this, MainActivity::class.java)
-            startActivity(i)
-            finish()
-
         }
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        /*val i = Intent(this, MainActivity::class.java)
+        startActivity(i)*/
+        finish()
         return super.onKeyDown(keyCode, event)
     }
 
@@ -111,12 +112,12 @@ class TaskActivity : AppCompatActivity() {
         }
 
         fun setTaskSelected(newView: TaskHolder) {
-            if (oldItem.getTask().isSolved == "true") {
+            if (oldItem.getTask().isSolved == 1) {
                 oldItem.setTaskBlockBackground(R.drawable.task_solved_block)
-            } else if (oldItem.getTask().isSolved == "false") {
+            } else if (oldItem.getTask().isSolved == null) {
                 oldItem.setTaskBlockBackground(R.drawable.task_not_solved_block)
             }
-            if (newView.getTask().isSolved == "true") {
+            if (newView.getTask().isSolved == 1) {
                 newView.setTaskBlockBackground(R.drawable.task_solved_selected)
             } else {
                 newView.setTaskBlockBackground(R.drawable.task_not_solved_selected)
@@ -154,7 +155,8 @@ class TaskActivity : AppCompatActivity() {
 
             fun bind(task: Task) {
                 this.task = task
-                if (task.isSolved == "true" && task.id == currentTaskIndex) {
+                Log.i(TAG, "${task.isSolved}")
+                if (task.isSolved == 1 && task.id == currentTaskIndex) {
                     taskBlock.background = AppCompatResources.getDrawable(
                         applicationContext,
                         R.drawable.task_solved_selected
@@ -162,7 +164,7 @@ class TaskActivity : AppCompatActivity() {
                     oldItem = this
                     return
                 }
-                if (task.isSolved == "false" && task.id == currentTaskIndex) {
+                if (task.isSolved == null && task.id == currentTaskIndex) {
                     oldItem = this
                     taskBlock.background = AppCompatResources.getDrawable(
                         applicationContext,
@@ -171,7 +173,7 @@ class TaskActivity : AppCompatActivity() {
                     return
                 }
 
-                if (task.isSolved == "true") {
+                if (task.isSolved == 1) {
                     taskBlock.background = AppCompatResources.getDrawable(
                         applicationContext,
                         R.drawable.task_solved_block
@@ -207,7 +209,18 @@ class TaskActivity : AppCompatActivity() {
 }
 
 class TaskViewModel : ViewModel() {
-    val courseRepository = CourseRepository.get()
+    private val courseRepository = CourseRepository.get()
+    var tasksLiveData: LiveData<List<Task>>? = null
+    var tasksArrayList: ArrayList<Task> = arrayListOf()
+    var submoduleId: Int = 0
     var oldSavedTaskId: LiveData<Int>? = null
     var newSavedTaskId: Int? = null
+    fun getDefaultTaskId(courseId: Int) {
+        oldSavedTaskId = courseRepository.getDefaultTaskId(courseId)
+    }
+
+    fun getTasks(id: Int) = courseRepository.getTasks(id)
+
+    fun commitSavedTaskId(submoduleId: Int, taskId: Int) = courseRepository.commitSavedTaskId(submoduleId, taskId)
 }
+

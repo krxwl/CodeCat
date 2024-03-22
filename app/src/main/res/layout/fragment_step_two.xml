@@ -34,7 +34,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password"
+                android:hint="@string/enter_your_password"
                 android:textSize="@dimen/_12ssp"
                 android:id="@+id/password_text_input_register"
                 android:inputType="textPassword"/>

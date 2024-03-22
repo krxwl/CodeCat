@@ -20,7 +20,7 @@ interface CourseDao {
     fun commitSavedTaskId(submoduleId: Int, savedTaskId: Int)
 
     @Query("SELECT savedTaskId FROM submodules where id=(:id)")
-    fun getDefaultTaskId(id: Int): LiveData<Int>
+    fun getDefaultTaskId(id: Int): LiveData<Int>?
 
     @Query("SELECT * FROM submodules where module=(:id)")
     fun getSubmodules(id: Int): LiveData<List<Submodule>>

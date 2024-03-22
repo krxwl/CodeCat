@@ -17,7 +17,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/montserratbold"
+                android:fontFamily="@font/roboto_bold"
                 android:textSize="@dimen/_17ssp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
 
-                android:fontFamily="@font/montserratbold"
+                android:fontFamily="@font/roboto_medium"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -50,14 +50,14 @@
 
                     <TextView
                         android:background="@drawable/cell_shape"
-                        android:fontFamily="@font/montserratbold"
+                        android:fontFamily="@font/roboto_bold"
                         android:padding="5dip"
                         android:textSize="@dimen/_12ssp"
                         android:text="@string/input_data" />
 
                     <TextView
                         android:background="@drawable/cell_shape"
-                        android:fontFamily="@font/montserratbold"
+                        android:fontFamily="@font/roboto_bold"
                         android:padding="5dip"
                         android:textSize="@dimen/_12ssp"
                         android:text="@string/output_data" />
@@ -84,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_400sdp"
                 android:layout_marginTop="20dp"
-                android:background="@color/dark_grey"
+                android:background="@color/very_dark_grey"
                 android:dropDownHorizontalOffset="0dp"
                 android:fontFamily="@font/code_font"
                 android:gravity="top|start"

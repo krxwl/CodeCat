@@ -30,11 +30,10 @@ class MainActivity : AppCompatActivity(), AllCoursesFragment.Callbacks, MyCourse
         ViewModelProvider(this)[FragmentViewModel::class.java]
     }
 
-    override fun onSubmoduleSelected(tasks: List<Task>) {
+    override fun onSubmoduleSelected(id: Int) {
         val bundle = Bundle()
-        bundle.putParcelableArrayList("tasks", tasks as java.util.ArrayList<out Parcelable>)
-        startActivity(Intent(this, TaskActivity::class.java).putExtras(bundle).addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY))
-        finish()
+        bundle.putInt("submoduleId", id)
+        startActivity(Intent(this, TaskActivity::class.java).putExtras(bundle))
     }
 
     override fun onCourseSelected(course: Course) {
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity(), AllCoursesFragment.Callbacks, MyCourse
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // убирает задержку между активити
+        // убирает задержку между активитиr
         super.onCreate(savedInstanceState)
         auth = Firebase.auth
         binding = BottomNavigationMenuBinding.inflate(layoutInflater)

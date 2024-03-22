@@ -10,8 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.github.krxwl.codecat.R
+import com.github.krxwl.codecat.activities.mainactivity.MainActivity
 import com.github.krxwl.codecat.activities.registrationactivity.RegistrationActivityContract
-import com.github.krxwl.codecat.databinding.FragmentAuthenticationBinding
+import com.github.krxwl.codecat.databinding.FragmentAuthBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -30,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         ViewModelProvider(this)[LoginViewModel::class.java]
     }
 
-    private lateinit var binding: FragmentAuthenticationBinding
+    private lateinit var binding: FragmentAuthBinding
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        binding = FragmentAuthenticationBinding.inflate(layoutInflater)
+        binding = FragmentAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.emailTextInput.setFocusable(true)
@@ -82,6 +83,8 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 auth.signInWithEmailAndPassword(email.strip(), password.strip()).addOnCompleteListener(this) {
                     if (it.isSuccessful) {
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                         finish()
                     } else {
                         snackbar.setText("Log In failed")
