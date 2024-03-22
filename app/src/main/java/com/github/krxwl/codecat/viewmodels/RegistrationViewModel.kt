@@ -1,4 +1,4 @@
-package com.github.krxwl.codecat.activities.registrationactivity
+package com.github.krxwl.codecat.viewmodels
 
 import androidx.lifecycle.ViewModel
 

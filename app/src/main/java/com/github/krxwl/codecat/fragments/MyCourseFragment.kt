@@ -1,4 +1,4 @@
-package com.github.krxwl.codecat
+package com.github.krxwl.codecat.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -15,11 +16,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.github.krxwl.codecat.Prefs
+import com.github.krxwl.codecat.Prefs.Companion.dataStore
+import com.github.krxwl.codecat.R
 import com.github.krxwl.codecat.customspinner.CustomAdapter
 import com.github.krxwl.codecat.customspinner.CustomItem
 import com.github.krxwl.codecat.database.CourseRepository
@@ -27,6 +32,8 @@ import com.github.krxwl.codecat.databinding.MyCourseFragmentBinding
 import com.github.krxwl.codecat.entities.Submodule
 import com.github.krxwl.codecat.entities.Task
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 private const val TAG = "MyCourseFragment"
 class MyCourseFragment : Fragment(R.layout.my_course_fragment) {
@@ -37,8 +44,8 @@ class MyCourseFragment : Fragment(R.layout.my_course_fragment) {
     private var callbacks: Callbacks? = null
 
 
-    lateinit var binding: MyCourseFragmentBinding
-    lateinit var customArrayList: ArrayList<CustomItem>
+    private lateinit var binding: MyCourseFragmentBinding
+    private lateinit var customArrayList: ArrayList<CustomItem>
     private var adapter: SubmodulesAdapter? = SubmodulesAdapter(arrayListOf())
 
     private val myCourseViewModel: MyCourseViewModel by viewModels()
@@ -79,40 +86,46 @@ class MyCourseFragment : Fragment(R.layout.my_course_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         myCourseViewModel.courseListLiveData.observe(
-            viewLifecycleOwner,
-            androidx.lifecycle.Observer { courses ->
-                courses?.let {
-                    customArrayList = ArrayList()
-                    for (course in courses) {
-                        var (id, name, _, _, _, image) = course
-                        customArrayList.add(CustomItem(id!!, name.toString(), image!!))
-                    }
-                    binding.customSpinner.adapter = CustomAdapter(this.requireContext(), customArrayList)
-                    // TODO("СДЕЛАТЬ УСТАНОВКУ КУРСА ПО УМОЛЧАНИЮ")
-                    val index = myCourseViewModel.getIndex()
-                    Log.i(TAG, "ИНДЕКС ${index}")
-                    if (index != null) {
-                        myCourseViewModel.setIndex(index)
-                        binding.customSpinner.setSelection(index)
-                    }
-                    //binding.customSpinner.setSelection(1)
-                    //myCourseViewModel.setIndex(2)
+            viewLifecycleOwner
+        ) { courses ->
+            courses?.let {
+                customArrayList = ArrayList()
+                for (course in courses) {
+                    val (id, name, _, _, image) = course
+                    customArrayList.add(CustomItem(id!!, name.toString(), image!!))
+                }
+                binding.customSpinner.adapter =
+                    CustomAdapter(this.requireContext(), customArrayList)
+                // TODO("СДЕЛАТЬ УСТАНОВКУ КУРСА ПО УМОЛЧАНИЮ")
+                val index = myCourseViewModel.getIndex()
+                Log.i(TAG, "ИНДЕКС $index")
+                if (index != null) {
+                    myCourseViewModel.setIndex(index)
+                    binding.customSpinner.setSelection(index)
+                }
+                val mainSlide: Flow<Int> = requireContext().dataStore.data.map { preferences ->
+                    preferences[Prefs.MAIN_COURSE_KEY] ?: 0
+                }
+                mainSlide.asLiveData().observe(viewLifecycleOwner) { slide ->
+                    binding.customSpinner.setSelection(slide - 1)
+                    myCourseViewModel.setIndex(slide)
                 }
             }
-        )
+        }
 
         myCourseViewModel.submodulesListLiveData.observe(
-            viewLifecycleOwner,
-            androidx.lifecycle.Observer { submodules ->
-                submodules?.let {
-                    updateUI(submodules)
-                }
+            viewLifecycleOwner
+        ) { submodules ->
+            submodules?.let {
+                updateUI(submodules)
             }
-        )
+        }
     }
 
-    inner class SubmodulesAdapter(var submodules: ArrayList<Submodule>) : ListAdapter<Submodule, SubmodulesAdapter.SubmoduleHolder>(LinkDiffCallback()) {
-        override fun onBindViewHolder(holder: SubmodulesAdapter.SubmoduleHolder, position: Int) {
+    inner class SubmodulesAdapter(private var submodules: ArrayList<Submodule>) : ListAdapter<Submodule, SubmodulesAdapter.SubmoduleHolder>(
+        LinkDiffCallback()
+    ) {
+        override fun onBindViewHolder(holder: SubmoduleHolder, position: Int) {
             val submodule = submodules[position]
             holder.bind(submodule)
         }
@@ -122,7 +135,7 @@ class MyCourseFragment : Fragment(R.layout.my_course_fragment) {
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-        ): SubmodulesAdapter.SubmoduleHolder {
+        ): SubmoduleHolder {
             return SubmoduleHolder(layoutInflater.inflate(R.layout.my_course_item, parent, false))
         }
 
@@ -150,7 +163,7 @@ class MyCourseFragment : Fragment(R.layout.my_course_fragment) {
                     imageView.setImageDrawable(resources.getDrawable(R.drawable.document))
                 }
                 //imageButton.setImageBitmap(this.submodule.image)
-                progressTextView.setText("${0}/15")
+                progressTextView.text = "${0}/15"
             }
 
             override fun onClick(p0: View?) {
@@ -180,7 +193,7 @@ class MyCourseFragment : Fragment(R.layout.my_course_fragment) {
 class MyCourseViewModel(
     private val state: SavedStateHandle
 ) : ViewModel() {
-    val courseRepository = CourseRepository.get()
+    private val courseRepository = CourseRepository.get()
     val courseListLiveData = courseRepository.getCourses()
     var submodulesListLiveData: LiveData<List<Submodule>> = state.getLiveData<Int>("index").switchMap { id ->
         courseRepository.getSubmodules(id + 1)

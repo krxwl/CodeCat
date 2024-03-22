@@ -1,6 +1,5 @@
-package com.github.krxwl.codecat.activities.taskactivity
+package com.github.krxwl.codecat.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -17,14 +16,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.krxwl.codecat.R
-import com.github.krxwl.codecat.activities.mainactivity.MainActivity
 import com.github.krxwl.codecat.database.CourseRepository
 import com.github.krxwl.codecat.databinding.TaskActivityBinding
 import com.github.krxwl.codecat.entities.Task
+import com.github.krxwl.codecat.fragments.TaskFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 private const val TAG = "TaskActivity"
+private const val TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKRE9PRExFIiwic3ViIjoiV1MtQVBJLVRPS0VOIiwiY2xpZW50LWlkIjoiOGEzMTFiYTRjYzFiOGU3MGQxZmY1N2I1ZDQyYmZiYWMiLCJpYXQiOjE3MDU3NTY3NTgsImV4cCI6MTcwNTc1NjkzOH0.wjaz9_FEVeQbie1Lq3yX5zbIAIfq8l-vjtklPXi_sHY"
+
 
 class TaskActivity : AppCompatActivity() {
 
@@ -86,11 +87,11 @@ class TaskActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
+        // запоминаем в бд какое задание было открыто последним
         super.onStop()
         if (taskViewModel.newSavedTaskId != taskViewModel.oldSavedTaskId?.value && taskViewModel.newSavedTaskId != null) {
             lifecycleScope.launch(Dispatchers.IO) {
                 taskViewModel.commitSavedTaskId(taskViewModel.submoduleId, taskViewModel.newSavedTaskId!!)
-                Log.i(TAG, "Я ВЫПОЛНИЛ ${taskViewModel.newSavedTaskId}")
             }
         }
     }
@@ -102,7 +103,9 @@ class TaskActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-    inner class TaskAdapter(var tasks: ArrayList<Task>, var currentTaskIndex: Int = 0) : ListAdapter<Task, TaskAdapter.TaskHolder>(LinkDiffCallback()) {
+    inner class TaskAdapter(var tasks: ArrayList<Task>, var currentTaskIndex: Int = 0) : ListAdapter<Task, TaskAdapter.TaskHolder>(
+        LinkDiffCallback()
+    ) {
 
         lateinit var oldItem: TaskHolder
 

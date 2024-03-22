@@ -1,8 +1,7 @@
-package com.github.krxwl.codecat.activities.registrationactivity
+package com.github.krxwl.codecat.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +9,13 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.github.krxwl.codecat.Prefs.Companion.KEY_EMAIL_TEXT
+import com.github.krxwl.codecat.Prefs.Companion.KEY_PASSWORD_TEXT
 import com.github.krxwl.codecat.R
+import com.github.krxwl.codecat.viewmodels.RegistrationViewModel
 import com.github.krxwl.codecat.databinding.FragmentStepOneBinding
 import com.google.android.material.snackbar.Snackbar
 
-private const val KEY_EMAIL_TEXT = "emailText"
-private const val KEY_PASSWORD_TEXT = "passwordText"
-private const val TAG = "FirstQuestionFragment"
 class FirstQuestionFragment : Fragment(R.layout.fragment_step_one) {
 
     private val registrationViewModel: RegistrationViewModel by lazy {
@@ -70,11 +69,6 @@ class FirstQuestionFragment : Fragment(R.layout.fragment_step_one) {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.i(TAG, "вернулись")
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks?
@@ -84,6 +78,5 @@ class FirstQuestionFragment : Fragment(R.layout.fragment_step_one) {
         super.onSaveInstanceState(outState)
         outState.putString(KEY_EMAIL_TEXT, registrationViewModel.email)
         outState.putString(KEY_PASSWORD_TEXT, registrationViewModel.password)
-        Log.i(TAG, "iquwerouiwe")
     }
 }

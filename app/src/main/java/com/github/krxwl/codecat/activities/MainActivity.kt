@@ -1,20 +1,17 @@
-package com.github.krxwl.codecat.activities.mainactivity
+package com.github.krxwl.codecat.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.github.krxwl.codecat.BottomSheet
-import com.github.krxwl.codecat.activities.loginactivity.LoginActivity
-import com.github.krxwl.codecat.MyCourseFragment
+import com.github.krxwl.codecat.fragments.BottomSheetFragment
+import com.github.krxwl.codecat.fragments.MyCourseFragment
 import com.github.krxwl.codecat.R
-import com.github.krxwl.codecat.activities.taskactivity.TaskActivity
 import com.github.krxwl.codecat.databinding.BottomNavigationMenuBinding
 import com.github.krxwl.codecat.entities.Course
-import com.github.krxwl.codecat.entities.Task
+import com.github.krxwl.codecat.fragments.AllCoursesFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -37,12 +34,11 @@ class MainActivity : AppCompatActivity(), AllCoursesFragment.Callbacks, MyCourse
     }
 
     override fun onCourseSelected(course: Course) {
-        val bottomSheet = BottomSheet(course)
-        bottomSheet.show(supportFragmentManager, BottomSheet.TAG)
+        val bottomSheet = BottomSheetFragment(course)
+        bottomSheet.show(supportFragmentManager, BottomSheetFragment.TAG)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // убирает задержку между активитиr
         super.onCreate(savedInstanceState)
         auth = Firebase.auth
         binding = BottomNavigationMenuBinding.inflate(layoutInflater)

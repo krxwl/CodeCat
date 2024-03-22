@@ -8,7 +8,6 @@ class CodeCatApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Log.i("SDFJGH", "ИНИЦИАЛИЗИРУЮ")
         CourseRepository.initialize(this)
     }
 

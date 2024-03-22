@@ -1,11 +1,12 @@
-package com.github.krxwl.codecat.activities.registrationactivity
+package com.github.krxwl.codecat.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.github.krxwl.codecat.activities.registrationactivity.FirstQuestionFragment
 import com.github.krxwl.codecat.R
-import com.github.krxwl.codecat.SecondQuestionFragment
+import com.github.krxwl.codecat.fragments.FirstQuestionFragment
+import com.github.krxwl.codecat.fragments.SecondQuestionFragment
+import com.github.krxwl.codecat.viewmodels.RegistrationViewModel
 
 class RegistrationActivity : AppCompatActivity(), FirstQuestionFragment.Callbacks,
     SecondQuestionFragment.Callbacks {

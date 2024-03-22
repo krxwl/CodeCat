@@ -1,4 +1,4 @@
-package com.github.krxwl.codecat
+package com.github.krxwl.codecat.fragments
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
+import com.github.krxwl.codecat.R
 import com.github.krxwl.codecat.databinding.BottomSheetBinding
 import com.github.krxwl.codecat.entities.Book
 import com.github.krxwl.codecat.entities.Course
@@ -36,11 +37,10 @@ import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
 
-
 private const val API_KEY_GOOGLE_BOOKS = "AIzaSyBATmMX8JWe5S2HnyM_A09g46aQzx503xI"
 private const val TAG = "BottomSheet"
 
-class BottomSheet(course: Course) : BottomSheetDialogFragment() {
+class BottomSheetFragment(course: Course) : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetBinding
     private val currentCourse = course
@@ -81,7 +81,7 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
 
     private fun getBooksId(languageName: String) {
         val url =
-            "https://www.googleapis.com/books/v1/volumes?q=${languageName}книги+intitle:${languageName}&maxResults=10&startIndex=0&key=${API_KEY_GOOGLE_BOOKS}"
+            "https://www.googleapis.com/books/v1/volumes?q=${languageName}книги+intitle:${languageName}&maxResults=10&startIndex=0&key=$API_KEY_GOOGLE_BOOKS"
         val request: Request = Request.Builder().url(url).build()
 
         client.newCall(request).enqueue(object : Callback {
@@ -113,7 +113,7 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
     }
 
     fun getBook(id: String) {
-        val url = "https://www.googleapis.com/books/v1/volumes/${id}?key=${API_KEY_GOOGLE_BOOKS}"
+        val url = "https://www.googleapis.com/books/v1/volumes/${id}?key=$API_KEY_GOOGLE_BOOKS"
         val request: Request = Request.Builder().url(url).build()
 
         client.newCall(request).enqueue(object : Callback {
@@ -195,7 +195,8 @@ class BottomSheet(course: Course) : BottomSheetDialogFragment() {
             return BookHolder(layoutInflater.inflate(R.layout.book_carousel_item, parent, false))
         }
 
-        inner class BookHolder(view: View?) : RecyclerView.ViewHolder(view!!), View.OnClickListener {
+        inner class BookHolder(view: View?) : RecyclerView.ViewHolder(view!!),
+            View.OnClickListener {
 
             private lateinit var book: Book
 

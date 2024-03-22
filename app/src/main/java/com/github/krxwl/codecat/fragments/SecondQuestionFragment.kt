@@ -1,8 +1,7 @@
-package com.github.krxwl.codecat
+package com.github.krxwl.codecat.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +9,16 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.github.krxwl.codecat.activities.registrationactivity.RegistrationViewModel
+import com.github.krxwl.codecat.Prefs.Companion.KEY_EMAIL_TEXT
+import com.github.krxwl.codecat.Prefs.Companion.KEY_PASSWORD_TEXT
+import com.github.krxwl.codecat.R
+import com.github.krxwl.codecat.viewmodels.RegistrationViewModel
 import com.github.krxwl.codecat.databinding.FragmentStepTwoBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-private const val KEY_EMAIL_TEXT = "emailText"
-private const val KEY_PASSWORD_TEXT = "passwordText"
-private const val TAG = "SecondQuestionFragment"
 class SecondQuestionFragment : Fragment() {
 
     interface Callbacks {
@@ -84,13 +83,10 @@ class SecondQuestionFragment : Fragment() {
             } else {
                 auth.createUserWithEmailAndPassword(email.strip(), password.strip()).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "createUserWithEmail:success")
                         val user = auth.currentUser
                         callbacks.userRegistered()
 
                     } else {
-                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
                         snackbar.setText(R.string.authentication_failed)
                     }
                 }

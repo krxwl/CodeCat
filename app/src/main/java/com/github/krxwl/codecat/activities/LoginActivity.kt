@@ -1,17 +1,14 @@
-package com.github.krxwl.codecat.activities.loginactivity
+package com.github.krxwl.codecat.activities
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.github.krxwl.codecat.R
-import com.github.krxwl.codecat.activities.mainactivity.MainActivity
-import com.github.krxwl.codecat.activities.registrationactivity.RegistrationActivityContract
 import com.github.krxwl.codecat.databinding.FragmentAuthBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -95,7 +92,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.emailTextInput.setOnFocusChangeListener {  _, hasFocus ->
-            Log.i(TAG, "СТРОКИ ПОЛУЧИЛ ${loginViewModel.passwordText}")
             if (!hasFocus) {
                 loginViewModel.emailText = binding.emailTextInput.text.toString()
             }
